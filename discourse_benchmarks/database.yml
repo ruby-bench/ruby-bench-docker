@@ -30,7 +30,7 @@ profile:
   min_messages: warning
   pool: 5
   timeout: 5000
-  host: <%= ENV["PG_PORT_5432_TCP_ADDR"] %> || "localhost"
+  host: <%= ENV["POSTGRES_PORT_5432_TCP_ADDR"] || "localhost" %>
   username: 'postgres'
 # You may be surprised production is not here, it is sourced from application.rb using a monkey patch
 # This is done for 2 reasons
