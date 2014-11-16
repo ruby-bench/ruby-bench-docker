@@ -3,7 +3,7 @@
 #### Build base image for Discourse
 ```bash
 cd discourse_benchmarks
-sudo docker build -t bench/discourse_bench .
+sudo docker build --no-cache -t bench/discourse_bench .
 ```
 
 
@@ -14,7 +14,7 @@ sudo docker run --name discourse_redis -d redis && sudo docker run --name discou
 
 #### Run Discourse benchmarks
 ```bash
-sudo docker run --rm --name discourse_benchmarks --link discourse_postgres:postgres --link discourse_redis:redis bench/discourse_bench
+sudo docker run --rm --name discourse_benchmarks --link discourse_postgres:postgres --link discourse_redis:redis -e "RAILS_COMMIT_HASH=<hash to benchmark against>" bench/discourse_bench
 ```
 
 ## Ruby Benchmarks
