@@ -1,3 +1,15 @@
+## Rails Benchmarks
+
+#### Build base image for sample app
+```bash
+sudo docker build --no-cache -t tgxworld/rails_bench .
+```
+
+#### Run Rails benchmarks
+````bash
+sudo docker run --rm --name rails_benchmarks -e "RAILS_COMMIT_HASH=<hash to benchmark against>" -e "RUBY_VERSION=2.1.5" tgxworld/rails_bench
+````
+
 ## Discourse Benchmarks
 
 #### Build base image for Discourse
