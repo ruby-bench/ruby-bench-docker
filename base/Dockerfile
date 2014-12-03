@@ -9,9 +9,9 @@ RUN git clone https://github.com/sstephenson/ruby-build.git /root/.rbenv/plugins
 RUN ./root/.rbenv/plugins/ruby-build/install.sh
 ENV PATH /root/.rbenv/bin:$PATH
 RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh # or /etc/profile
-RUN echo 'eval "$(rbenv init -)"' >> .bashrc
+RUN echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 
-RUN /bin/bash -c "rbenv install 1.9.3-p551"
-RUN /bin/bash -c "rbenv install 2.0.0-p598"
-RUN /bin/bash -c "rbenv install 2.1.5"
-RUN /bin/bash -c "rbenv global 2.1.5"
+RUN /bin/bash -l -c "rbenv install 1.9.3-p551"
+RUN /bin/bash -l -c "rbenv install 2.0.0-p598"
+RUN /bin/bash -l -c "rbenv install 2.1.5"
+RUN /bin/bash -l -c "rbenv global 2.1.5"
