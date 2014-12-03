@@ -13,4 +13,4 @@ if ruby_version
   system("rbenv global #{ruby_version}")
 end
 
-system('bundle install')
+system('bundle update rails')
