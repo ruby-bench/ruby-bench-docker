@@ -7,7 +7,7 @@ sudo docker build --no-cache -t tgxworld/rails_bench .
 
 #### Run Rails benchmarks
 ````bash
-sudo docker run --rm --name rails_benchmarks -e "RAILS_COMMIT_HASH=<hash to benchmark against>" -e "RUBY_VERSION=2.1.5" tgxworld/rails_bench
+sudo docker run --rm -e "RAILS_COMMIT_HASH=<hash to benchmark against>" -e "RUBY_VERSION=2.1.5" tgxworld/rails_bench
 ````
 
 ## Discourse Benchmarks
@@ -20,7 +20,7 @@ sudo docker build --no-cache -t tgxworld/discourse_bench .
 
 #### Setup containers for Redis server and PostgreSQL
 ```bash
-sudo docker run --name discourse_redis -d redis && sudo docker run --name discourse_postgres -d postgres
+sudo docker run -d redis && sudo docker run --name discourse_postgres -d postgres
 ```
 
 #### Run Discourse benchmarks
@@ -37,5 +37,5 @@ sudo docker build --no-cache -t tgxworld/ruby_bench .
 
 #### Run Ruby benchmarks
 ```bash
-sudo docker run --rm --name ruby_benchmarks -e "RUBY_VERSION=2.1.5" tgxworld/ruby_bench
+sudo docker run --rm -e "RUBY_VERSION=2.1.5" tgxworld/ruby_bench
 ```
