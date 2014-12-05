@@ -3,7 +3,10 @@ MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
 RUN git clone https://github.com/ruby/ruby.git
 WORKDIR ruby
+RUN /bin/bash -l -c "gem install faraday"
 
-ADD runner.rb ruby/runner.rb
+ADD runner ruby/runner
+ADD driver.rb ruby/benchmark/driver.rb
+RUN chmod 755 runner
 
-CMD /bin/bash -l -c "ruby runner.rb && ruby benchmark/run.rb --ruby=ruby -r"
+CMD /bin/bash -l -c "./runner && ruby benchmark/driver.rb --executables ruby -v --repeat-count 10"

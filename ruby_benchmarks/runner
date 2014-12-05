@@ -1,0 +1,21 @@
+# !/bin/bash
+ruby_commit_hash=$RUBY_COMMIT_HASH
+
+if [ ! $ruby_commit_hash ]; then
+  echo "Running benchmarks using lastest Ruby commit"
+else
+  echo "Running benchmarks using Ruby commit $ruby_commit_hash"
+fi
+
+git fetch origin
+git rebase origin/trunk
+
+if [ ! $ruby_commit_hash ]; then
+  git reset --hard $ruby_commit_hash
+fi
+
+autoconf
+./configure
+make
+make install
+rbenv global system
