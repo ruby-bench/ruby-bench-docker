@@ -1,15 +1,14 @@
 # !/bin/bash
-ruby_commit_hash=$RUBY_COMMIT_HASH
 cd ruby
 
 git fetch origin
 git rebase origin/trunk
 
-if [ ! $ruby_commit_hash ]; then
-  echo "Running benchmarks using Ruby commit $ruby_commit_hash"
-  git reset --hard $ruby_commit_hash
-else
+if [ -z "$RUBY_COMMIT_HASH" ]; then
   echo "Running benchmarks using lastest Ruby commit"
+else
+  echo "Running benchmarks using Ruby commit $RUBY_COMMIT_HASH"
+  git reset --hard $RUBY_COMMIT_HASH
 fi
 
 autoconf
