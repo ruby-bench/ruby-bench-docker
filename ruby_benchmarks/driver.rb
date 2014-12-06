@@ -161,7 +161,7 @@ class BenchmarkDriver
         req.params = {
           benchmark_run: {
             category: v,
-            result: { "#{v}" => s } ,
+            result: { "#{v}" => rets.first } ,
             environment: @execs.map { |(_,v)| v }.first,
           },
           commit_hash: ENV['RUBY_COMMIT_HASH'],
