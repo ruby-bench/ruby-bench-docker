@@ -8,4 +8,4 @@ ADD runner ruby/runner
 ADD driver.rb ruby/benchmark/driver.rb
 RUN chmod 755 runner
 
-CMD /bin/bash -l -c "./runner && ruby benchmark/driver.rb --executables ruby -v --repeat-count 10"
+CMD /bin/bash -l -c "./runner && ruby benchmark/driver.rb --executables ruby -v --repeat-count 1"
