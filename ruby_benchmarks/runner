@@ -19,3 +19,5 @@ autoconf
 make
 make install
 rbenv global system
+
+gem install faraday

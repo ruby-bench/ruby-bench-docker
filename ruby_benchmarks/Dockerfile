@@ -3,7 +3,6 @@ MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
 RUN git clone https://github.com/ruby/ruby.git
 WORKDIR ruby
-RUN /bin/bash -l -c "gem install faraday"
 
 ADD runner ruby/runner
 ADD driver.rb ruby/benchmark/driver.rb
