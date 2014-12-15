@@ -163,6 +163,7 @@ class BenchmarkDriver
             category: v,
             result: { "#{v}" => rets.first } ,
             environment: @execs.map { |(_,v)| v }.first,
+            unit: 'seconds'
           },
           commit_hash: ENV['RUBY_COMMIT_HASH'],
           repo: 'ruby',
