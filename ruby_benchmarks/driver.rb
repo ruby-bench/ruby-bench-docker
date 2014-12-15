@@ -171,6 +171,8 @@ class BenchmarkDriver
           repo: 'ruby',
           organization: 'tgxworld'
         }
+
+        output "Posting results to Web UI...."
       end
 
       output "#{v}#{s}\t#{rets.join("\t")}"
