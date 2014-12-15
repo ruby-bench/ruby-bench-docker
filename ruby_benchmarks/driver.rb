@@ -2,6 +2,7 @@
 # Ruby Benchmark driver
 #
 require 'faraday'
+RAW_URL = 'https://raw.githubusercontent.com/ruby/ruby/trunk/benchmark/bm_'
 
 first = true
 
@@ -163,7 +164,8 @@ class BenchmarkDriver
             category: v,
             result: { "#{v}" => rets.first } ,
             environment: @execs.map { |(_,v)| v }.first,
-            unit: 'seconds'
+            unit: 'seconds',
+            script_url: "#{RAW_URL}#{v}.rb"
           },
           commit_hash: ENV['RUBY_COMMIT_HASH'],
           repo: 'ruby',
