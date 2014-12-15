@@ -17,6 +17,4 @@ make
 make install
 rbenv global system
 
-gem install faraday
-
 cd / && mv driver.rb ruby/benchmark/driver.rb

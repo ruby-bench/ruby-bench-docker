@@ -1,7 +1,7 @@
 #
 # Ruby Benchmark driver
 #
-require 'faraday'
+require 'net/http'
 RAW_URL = 'https://raw.githubusercontent.com/ruby/ruby/trunk/benchmark/bm_'
 
 first = true
@@ -154,27 +154,22 @@ class BenchmarkDriver
         rets << sprintf("%.3f", r)
       }
 
-      conn = Faraday.new(url: 'http://railsbench.herokuapp.com')
+      http = Net::HTTP.new('railsbench.herokuapp.com')
+      request = Net::HTTP::Post.new('/benchmark_runs')
 
-      conn.post do |req|
-        req.url '/benchmark_runs'
+      request.set_form_data({
+        'benchmark_run[category]' => v,
+        "benchmark_run[result][#{v}]" => rets.first,
+        'benchmark_run[environment]' => @execs.map { |(_,v)| v }.first,
+        'benchmark_run[unit]' => 'seconds',
+        'benchmark_run[script_url]' => "#{RAW_URL}#{v}.rb",
+        'commit_hash' => ENV['RUBY_COMMIT_HASH'],
+        'repo' => 'ruby',
+        'organization' => 'tgxworld'
+      })
 
-        req.params = {
-          benchmark_run: {
-            category: v,
-            result: { "#{v}" => rets.first } ,
-            environment: @execs.map { |(_,v)| v }.first,
-            unit: 'seconds',
-            script_url: "#{RAW_URL}#{v}.rb"
-          },
-          commit_hash: ENV['RUBY_COMMIT_HASH'],
-          repo: 'ruby',
-          organization: 'tgxworld'
-        }
-
-        output "Posting results to Web UI...."
-      end
-
+      http.request(request)
+      output "Posting results to Web UI...."
       output "#{v}#{s}\t#{rets.join("\t")}"
     }
 
