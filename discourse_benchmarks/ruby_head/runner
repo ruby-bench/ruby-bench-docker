@@ -1,0 +1,27 @@
+# !/bin/bash
+set -e
+
+cd ruby
+
+git fetch origin
+git rebase origin/trunk
+
+if [ -z "$RUBY_COMMIT_HASH" ]; then
+  echo "Running benchmarks using lastest Ruby commit"
+else
+  echo "Running benchmarks using Ruby commit $RUBY_COMMIT_HASH"
+  git reset --hard $RUBY_COMMIT_HASH
+fi
+
+autoconf
+./configure
+make
+make install
+rbenv global system
+
+cd /
+cd discourse
+sed -i "s/gem 'eventmachine'/gem 'eventmachine', git: 'https:\\/\\/github.com\\/eventmachine\\/eventmachine.git'/g" Gemfile
+gem install bundler --no-ri --no-rdoc
+gem install facter
+bundle install
