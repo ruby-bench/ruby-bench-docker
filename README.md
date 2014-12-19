@@ -20,7 +20,7 @@ sudo docker build --no-cache -t tgxworld/discourse_bench .
 
 #### Setup containers for Redis server and PostgreSQL
 ```bash
-sudo docker run -d redis && sudo docker run --name discourse_postgres -d postgres
+sudo docker run --name discourse_redis -d redis && sudo docker run --name discourse_postgres -d postgres
 ```
 
 #### Run Discourse benchmarks
