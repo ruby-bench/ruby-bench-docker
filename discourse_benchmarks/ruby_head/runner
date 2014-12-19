@@ -1,8 +1,17 @@
 # !/bin/bash
 set -e
 
-cd ruby
+while ! exec 6<>/dev/tcp/${POSTGRES_PORT_5432_TCP_ADDR}/${POSTGRES_PORT_5432_TCP_PORT}; do
+  echo "$(date) - still trying to connect to Postgres server"
+  sleep 1
+done
 
+while ! exec 6<>/dev/tcp/${REDIS_PORT_6379_TCP_ADDR}/${REDIS_PORT_6379_TCP_PORT}; do
+  echo "$(date) - still trying to connect to Redis server"
+  sleep 1
+done
+
+cd ruby
 git fetch origin
 git rebase origin/trunk
 
@@ -20,8 +29,15 @@ make install
 rbenv global system
 
 cd /
+createdb -T template0 -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres discourse_profile
+pg_restore --no-owner -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres -d discourse_profile discourse_profile.dump
+
 cd discourse
-sed -i "s/gem 'eventmachine'/gem 'eventmachine', git: 'https:\\/\\/github.com\\/eventmachine\\/eventmachine.git'/g" Gemfile
+git checkout stable
+mv /bench.rb script/bench.rb
+mv /database.yml config/database.yml
+mv /discourse.conf config/discourse.conf
+rm Gemfile.lock
 gem install bundler --no-ri --no-rdoc
 gem install facter
-bundle install
+bundle install --without development test

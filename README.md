@@ -12,20 +12,40 @@ sudo docker run --rm -e "RAILS_COMMIT_HASH=<hash to benchmark against>" -e "RUBY
 
 ## Discourse Benchmarks
 
+### Benchmarking Discourse against Ruby trunk
+
 #### Build base image for Discourse
 ```bash
-cd discourse_benchmarks
-sudo docker build --no-cache -t tgxworld/discourse_bench .
+cd discourse_benchmarks/ruby_head
+sudo docker build --no-cache -t tgxworld/discourse_ruby_trunk_bench .
 ```
 
 #### Setup containers for Redis server and PostgreSQL
 ```bash
-sudo docker run --name discourse_redis -d redis && sudo docker run --name discourse_postgres -d postgres
+sudo docker run --name discourse_redis -d redis:latest && sudo docker run --name discourse_postgres -d postgres:latest
 ```
 
-#### Run Discourse benchmarks
+#### Run benchmarks
 ```bash
-sudo docker run --rm --name discourse_benchmarks --link discourse_postgres:postgres --link discourse_redis:redis -e "RAILS_COMMIT_HASH=<hash to benchmark against>" -e "RUBY_VERSION=2.1.5" tgxworld/discourse_bench
+sudo docker run --rm --link discourse_postgres:postgres --link discourse_redis:redis -e "RUBY_COMMIT_HASH=<ruby commit sha1>" tgxworld/discourse_ruby_trunk_bench
+```
+
+### Benchmarking Discourse against Rails head
+
+#### Build base image for Discourse
+```bash
+cd discourse_benchmarks/rails_head
+sudo docker build --no-cache -t tgxworld/discourse_rails_head_bench .
+```
+
+#### Setup containers for Redis server and PostgreSQL
+```bash
+sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name discourse_postgres -d postgres:9.3.5
+```
+
+#### Run benchmarks
+```bash
+sudo docker run --rm --link discourse_postgres:postgres --link discourse_redis:redis -e "RUBY_COMMIT_HASH=<ruby commit sha1>" tgxworld/discourse_ruby_trunk_bench
 ```
 
 ## Ruby Benchmarks
