@@ -22,7 +22,7 @@ sudo docker build --no-cache -t tgxworld/discourse_ruby_trunk_bench .
 
 #### Setup containers for Redis server and PostgreSQL
 ```bash
-sudo docker run --name discourse_redis -d redis:latest && sudo docker run --name discourse_postgres -d postgres:latest
+sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name discourse_postgres -d postgres:9.3.5
 ```
 
 #### Run benchmarks
@@ -45,7 +45,7 @@ sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name
 
 #### Run benchmarks
 ```bash
-sudo docker run --rm --link discourse_postgres:postgres --link discourse_redis:redis -e "RUBY_COMMIT_HASH=<ruby commit sha1>" tgxworld/discourse_ruby_trunk_bench
+sudo docker run --rm --link discourse_postgres:postgres --link discourse_redis:redis -e "RAILS_COMMIT_HASH=<rails commit sha1>" tgxworld/discourse_rails_head_bench
 ```
 
 ## Ruby Benchmarks
