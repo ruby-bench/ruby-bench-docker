@@ -14,4 +14,4 @@ RUN chmod 755 runner
 
 ENV RAILS_MASTER 1
 
-CMD /bin/bash -l -c "./runner && cd discourse && ruby script/bench.rb -m -n"
+CMD /bin/bash -l -c "./runner"

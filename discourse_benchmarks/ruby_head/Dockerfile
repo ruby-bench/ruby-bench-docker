@@ -11,4 +11,4 @@ ADD bench.rb bench.rb
 ADD runner runner
 RUN chmod 755 runner
 
-CMD /bin/bash -l -c "./runner && cd discourse && ruby script/bench.rb -m -n"
+CMD /bin/bash -l -c "./runner"

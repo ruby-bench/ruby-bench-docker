@@ -33,3 +33,4 @@ mv /discourse.conf config/discourse.conf
 sed -i "s/gem 'rails', git: 'https:\\/\\/github.com\\/rails\\/rails.git'/gem 'rails', git: 'https:\\/\\/github.com\\/rails\\/rails.git', ref: '$RAILS_COMMIT_HASH'/g" Gemfile
 rm Gemfile_master.lock
 bundle install --without development test
+ruby script/bench.rb -m -n

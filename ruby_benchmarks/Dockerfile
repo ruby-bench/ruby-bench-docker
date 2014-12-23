@@ -9,4 +9,4 @@ ADD prepare_so_k_nucleotide.rb prepare_so_k_nucleotide.rb
 ADD prepare_so_reverse_complement.rb prepare_so_reverse_complement.rb
 RUN chmod 755 runner
 
-CMD /bin/bash -l -c "./runner && ruby ruby/benchmark/driver.rb --executables ruby -v --repeat-count 1"
+CMD /bin/bash -l -c "./runner"

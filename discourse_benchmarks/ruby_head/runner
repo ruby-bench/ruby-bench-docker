@@ -41,3 +41,4 @@ rm Gemfile.lock
 gem install bundler --no-ri --no-rdoc
 gem install facter
 bundle install --without development test
+ruby script/bench.rb -m -n
