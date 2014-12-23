@@ -57,5 +57,5 @@ sudo docker build --no-cache -t tgxworld/ruby_bench .
 
 #### Run Ruby benchmarks
 ```bash
-sudo docker run --rm -e "RUBY_VERSION=2.1.5" -e "API_NAME=<API NAME>" -e "API_PASSWORD=<API PASSWORD>" tgxworld/ruby_bench
+sudo docker run --rm -e "API_NAME=<API NAME>" -e "API_PASSWORD=<API PASSWORD>" tgxworld/ruby_bench
 ```
