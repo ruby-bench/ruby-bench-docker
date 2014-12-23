@@ -156,6 +156,7 @@ class BenchmarkDriver
 
       http = Net::HTTP.new('railsbench.herokuapp.com')
       request = Net::HTTP::Post.new('/benchmark_runs')
+      request.basic_auth(ENV["API_NAME"], ENV["API_PASSWORD"])
 
       request.set_form_data({
         'benchmark_run[category]' => v,

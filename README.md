@@ -27,7 +27,7 @@ sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name
 
 #### Run benchmarks
 ```bash
-sudo docker run --rm --link discourse_postgres:postgres --link discourse_redis:redis -e "RUBY_COMMIT_HASH=<ruby commit sha1>" tgxworld/discourse_ruby_trunk_bench
+sudo docker run --rm --link discourse_postgres:postgres --link discourse_redis:redis -e "RUBY_COMMIT_HASH=<ruby commit sha1>" -e "API_NAME=<API NAME>" -e "API_PASSWORD=<API PASSWORD>" tgxworld/discourse_ruby_trunk_bench
 ```
 
 ### Benchmarking Discourse against Rails head
@@ -45,7 +45,7 @@ sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name
 
 #### Run benchmarks
 ```bash
-sudo docker run --rm --link discourse_postgres:postgres --link discourse_redis:redis -e "RAILS_COMMIT_HASH=<rails commit sha1>" tgxworld/discourse_rails_head_bench
+sudo docker run --rm --link discourse_postgres:postgres --link discourse_redis:redis -e "RAILS_COMMIT_HASH=<rails commit sha1>" -e "API_NAME=<API NAME>" -e "API_PASSWORD=<API PASSWORD>" tgxworld/discourse_rails_head_bench
 ```
 
 ## Ruby Benchmarks
@@ -57,5 +57,5 @@ sudo docker build --no-cache -t tgxworld/ruby_bench .
 
 #### Run Ruby benchmarks
 ```bash
-sudo docker run --rm -e "RUBY_VERSION=2.1.5" tgxworld/ruby_bench
+sudo docker run --rm -e "RUBY_VERSION=2.1.5" -e "API_NAME=<API NAME>" -e "API_PASSWORD=<API PASSWORD>" tgxworld/ruby_bench
 ```

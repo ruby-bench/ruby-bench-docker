@@ -271,6 +271,8 @@ begin
       form_results["benchmark_run[result][#{key} percentile]"] = value
     end
 
+    request.basic_auth(ENV["API_NAME"], ENV["API_PASSWORD"])
+
     request.set_form_data({
       'benchmark_run[category]' => "discourse_ruby_trunk_#{category}",
       'benchmark_run[environment]' => environment.to_yaml,
