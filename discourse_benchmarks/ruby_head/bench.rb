@@ -36,11 +36,14 @@ end
 opts.parse!
 
 def run(command, opt = nil)
-  if opt == :quiet
-    system(command, out: "/dev/null", err: :out)
-  else
-    system(command, out: $stdout, err: :out)
-  end
+  exit_status =
+    if opt == :quiet
+      system(command, out: "/dev/null", err: :out)
+    else
+      system(command, out: $stdout, err: :out)
+    end
+
+  exit unless exit_status
 end
 
 begin
@@ -76,7 +79,7 @@ sudo apt-get install redis-server
 end
 
 puts "Running bundle"
-if !run("bundle", :quiet)
+if run("bundle", :quiet)
   puts "Quitting, some of the gems did not install"
   prereqs
   exit
