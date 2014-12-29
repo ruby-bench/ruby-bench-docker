@@ -1,5 +1,7 @@
 # Ruby Benchmarks
 
+## Ruby trunk
+
 #### Build base image for Ruby benchmarks
 ```bash
 sudo docker build --no-cache -t tgxworld/ruby_bench .
@@ -7,7 +9,18 @@ sudo docker build --no-cache -t tgxworld/ruby_bench .
 
 #### Run Ruby benchmarks
 ```bash
-sudo docker run --rm -e "RUBY_COMMIT_HASH=<ruby commit sha1>" -e "API_NAME=<API NAME>" -e "API_PASSWORD=<API PASSWORD>" tgxworld/ruby_bench
+sudo docker run --rm -e "API_NAME=<API NAME>" -e "API_PASSWORD=<API PASSWORD>" tgxworld/ruby_bench
+```
+## Ruby Releases
+
+#### Build base image for Ruby benchmarks
+```bash
+sudo docker build --no-cache -t tgxworld/ruby_releases .
+```
+
+#### Run Ruby benchmarks
+```bash
+sudo docker run --rm -e "RUBY_VERSION=<ruby version>" -e "API_NAME=<API NAME>" -e "API_PASSWORD=<API PASSWORD>" tgxworld/ruby_releases
 ```
 
 # Discourse Benchmarks
