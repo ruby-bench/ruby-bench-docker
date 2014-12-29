@@ -1,18 +1,18 @@
-## Rails Benchmarks
+# Ruby Benchmarks
 
-#### Build base image for sample app
+#### Build base image for Ruby benchmarks
 ```bash
-sudo docker build --no-cache -t tgxworld/rails_bench .
+sudo docker build --no-cache -t tgxworld/ruby_bench .
 ```
 
-#### Run Rails benchmarks
-````bash
-sudo docker run --rm -e "RAILS_COMMIT_HASH=<hash to benchmark against>" -e "RUBY_VERSION=2.1.5" tgxworld/rails_bench
-````
+#### Run Ruby benchmarks
+```bash
+sudo docker run --rm -e "RUBY_COMMIT_HASH=<ruby commit sha1>" -e "API_NAME=<API NAME>" -e "API_PASSWORD=<API PASSWORD>" tgxworld/ruby_bench
+```
 
-## Discourse Benchmarks
+# Discourse Benchmarks
 
-### Benchmarking Discourse against Ruby trunk
+## Benchmarking Discourse against Ruby trunk
 
 #### Build base image for Discourse
 ```bash
@@ -30,7 +30,7 @@ sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name
 sudo docker run --rm --link discourse_postgres:postgres --link discourse_redis:redis -e "RUBY_COMMIT_HASH=<ruby commit sha1>" -e "API_NAME=<API NAME>" -e "API_PASSWORD=<API PASSWORD>" tgxworld/discourse_ruby_trunk_bench
 ```
 
-### Benchmarking Discourse against Rails head
+## Benchmarking Discourse against Rails head
 
 #### Build base image for Discourse
 ```bash
@@ -46,16 +46,4 @@ sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name
 #### Run benchmarks
 ```bash
 sudo docker run --rm --link discourse_postgres:postgres --link discourse_redis:redis -e "RAILS_COMMIT_HASH=<rails commit sha1>" -e "API_NAME=<API NAME>" -e "API_PASSWORD=<API PASSWORD>" tgxworld/discourse_rails_head_bench
-```
-
-## Ruby Benchmarks
-
-#### Build base image for Ruby benchmarks
-```bash
-sudo docker build --no-cache -t tgxworld/ruby_bench .
-```
-
-#### Run Ruby benchmarks
-```bash
-sudo docker run --rm -e "API_NAME=<API NAME>" -e "API_PASSWORD=<API PASSWORD>" tgxworld/ruby_bench
 ```
