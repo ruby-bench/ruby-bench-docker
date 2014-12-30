@@ -15,6 +15,7 @@ sudo docker run --rm -e "API_NAME=<API NAME>" -e "API_PASSWORD=<API PASSWORD>" t
 
 #### Build base image for Ruby benchmarks
 ```bash
+sudo docker build --no-cache -t tgxworld/ruby_releases_base .
 sudo docker build --no-cache -t tgxworld/ruby_releases .
 ```
 

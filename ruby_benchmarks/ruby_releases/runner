@@ -3,8 +3,6 @@ set -e
 
 cd /
 mv driver.rb ruby/benchmark/driver.rb
-mv prepare_so_k_nucleotide.rb ruby/benchmark/prepare_so_k_nucleotide.rb
-mv prepare_so_reverse_complement.rb ruby/benchmark/prepare_so_reverse_complement.rb
 
 echo "Using Ruby $RUBY_VERSION"
 rbenv global $RUBY_VERSION
