@@ -29,9 +29,10 @@ RUN /bin/bash -l -c "rbenv install 2.1.4"
 RUN /bin/bash -l -c "rbenv install 2.1.5"
 
 RUN /bin/bash -l -c "rbenv install 2.2.0"
-RUN /bin/bash -l -c "rbenv global 2.2.0"
 
 # Install Github Ruby with per method cache
-ADD githubruby-2.2.0-dev githubruby-2.2.0-dev
-RUN /bin/bash -l -c "rbenv install githubruby-2.2.0-dev"
-RUN rm -rf ruby
+RUN git clone -b 2.2 --single-branch https://github.com/github/ruby.git githubruby
+ADD config.sub /githubruby/tool/config.sub
+ADD config.guess /githubruby/tool/config.guess
+RUN apt-get install -y ruby
+RUN cd githubruby && git reset --hard cd7d20399f5a8d4e924444943ea898d20e24c657 && autoconf && ./configure --prefix=/root/.rbenv/versions/githubruby-2.2.0-dev --disable-install-doc && make && make install

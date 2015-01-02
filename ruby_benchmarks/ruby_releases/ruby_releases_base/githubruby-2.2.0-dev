@@ -1,1 +1,0 @@
-install_git "githubruby-2.2.0-dev" "https://github.com/github/ruby.git" "2.2" ldflags_dirs autoconf standard verify_openssl
