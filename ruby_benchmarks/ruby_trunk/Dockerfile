@@ -1,7 +1,7 @@
 FROM tgxworld/ruby:0.1
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
-RUN git clone --verbose https://github.com/ruby/ruby.git
+RUN git clone --verbose --branch trunk --single-branch https://github.com/ruby/ruby.git
 
 ADD runner runner
 ADD driver.rb driver.rb

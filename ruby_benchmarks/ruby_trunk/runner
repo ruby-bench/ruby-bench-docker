@@ -14,7 +14,7 @@ else
 fi
 
 autoconf
-./configure
+./configure --disable-install-doc
 make
 make install
 rbenv global system
