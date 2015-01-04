@@ -1,8 +1,11 @@
 FROM tgxworld/ruby:0.1
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
-RUN git clone --verbose https://github.com/rails-bench/discourse.git
-RUN git clone --verbose https://github.com/ruby/ruby.git
+# Required for Discourse bench
+RUN apt-get install wget
+
+RUN git clone --verbose --branch stable --single-branch https://github.com/rails-bench/discourse.git
+RUN git clone --verbose --branch trunk --single-branch https://github.com/ruby/ruby.git
 
 ADD database.yml database.yml
 ADD discourse.conf discourse.conf
