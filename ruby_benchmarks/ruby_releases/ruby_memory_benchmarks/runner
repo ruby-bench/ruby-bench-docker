@@ -1,0 +1,16 @@
+# !/bin/bash
+set -e
+
+cd /
+mv driver.rb ruby/benchmark/driver.rb
+mv bm_io_select3.rb ruby/benchmark/bm_io_select3.rb
+mv bm_so_nsieve_bits.rb ruby/benchmark/bm_so_nsieve_bits.rb
+
+echo "Using Ruby $RUBY_VERSION"
+rbenv global $RUBY_VERSION
+
+echo "Checking RUBY_VERSION in environment"
+echo "RUBY_VERSION=$RUBY_VERSION"
+
+echo "Running benchmarks with Ruby $RUBY_VERSION"
+ruby ruby/benchmark/driver.rb --executables ruby --repeat-count 2
