@@ -36,6 +36,10 @@ cd discourse
 mv /bench.rb script/bench.rb
 mv /database.yml config/database.yml
 mv /discourse.conf config/discourse.conf
+
+# For faster Bundle install
+echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+
 gem install bundler --no-ri --no-rdoc
 gem install facter
 rbenv rehash
