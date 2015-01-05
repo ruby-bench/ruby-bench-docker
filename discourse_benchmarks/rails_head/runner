@@ -18,19 +18,19 @@ while ! exec 6<>/dev/tcp/${REDIS_PORT_6379_TCP_ADDR}/${REDIS_PORT_6379_TCP_PORT}
   sleep 1
 done
 
-cd /
 createdb -T template0 -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres discourse_profile
 pg_restore --no-owner -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres -d discourse_profile discourse_profile.dump
 
-cd discourse
+cd /discourse
 
 echo 'Resetting Discourse to fixed commit sha1...'
-git reset --hard 9e4942eeeb80a63020d64b7c7ef97074021c8695
+git reset --hard fce74e64a171256e56a80a196bdfddd24f356b1e
 
 mv /bench.rb script/bench.rb
 mv /database.yml config/database.yml
 mv /discourse.conf config/discourse.conf
+mv /Gemfile_master.lock Gemfile_master.lock
+mv /cache vendor/cache
 sed -i "s/gem 'rails', git: 'https:\\/\\/github.com\\/rails\\/rails.git'/gem 'rails', git: 'https:\\/\\/github.com\\/rails\\/rails.git', ref: '$RAILS_COMMIT_HASH'/g" Gemfile
-rm Gemfile_master.lock
-bundle install --without development test
-ruby script/bench.rb -m -n
+bundle install --without development:test
+ruby script/bench.rb -n -b 2

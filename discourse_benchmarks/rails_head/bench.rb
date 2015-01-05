@@ -35,7 +35,7 @@ opts = OptionParser.new do |o|
 end
 opts.parse!
 
-def run(command, opt = nil)
+def run(command, opt = nil, fail = true)
   exit_status =
     if opt == :quiet
       system(command, out: "/dev/null", err: :out)
@@ -43,7 +43,7 @@ def run(command, opt = nil)
       system(command, out: $stdout, err: :out)
     end
 
-  exit unless exit_status
+  exit if (fail && !exit_status)
 end
 
 begin
@@ -168,7 +168,7 @@ end
 begin
   # critical cause cache may be incompatible
   puts "precompiling assets"
-  run("bundle exec rake assets:precompile")
+  run("bundle exec rake assets:precompile", nil, false)
 
   pid = if @unicorn
           ENV['UNICORN_PORT'] = @port.to_s
