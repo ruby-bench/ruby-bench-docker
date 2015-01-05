@@ -11,6 +11,7 @@ ADD database.yml database.yml
 ADD discourse.conf discourse.conf
 ADD discourse_profile.dump discourse_profile.dump
 ADD bench.rb bench.rb
+ADD cache cache
 ADD runner runner
 RUN chmod 755 runner
 

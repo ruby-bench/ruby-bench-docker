@@ -227,30 +227,26 @@ begin
   run("RAILS_ENV=profile bundle exec rake assets:clean")
 
   def get_mem(pid)
-    YAML.load `ruby script/memstats.rb #{pid} --yaml`
+    `ps -o rss= -p #{pid}`.to_i
   end
-
 
   mem = get_mem(pid)
 
   environment = {}
   environment = environment.merge({
-    "timings" => @timings,
-    "ruby-version" => "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}",
-    "rss_kb" => mem["rss_kb"],
-    "pss_kb" => mem["pss_kb"]
+    "Time loading Rails" => @timings['load_rails'],
+    "Ruby version" => `ruby -v`,
+    "rss_kb" => mem,
   }).merge(facts)
 
   if @unicorn
     child_pids = `ps --ppid #{pid} | awk '{ print $1; }' | grep -v PID`.split("\n")
     child_pids.each do |child|
       mem = get_mem(child)
-      environment["rss_kb_#{child}"] = mem["rss_kb"]
-      environment["pss_kb_#{child}"] = mem["pss_kb"]
+      environment["rss_kb_#{child}"] = mem
     end
   end
 
-  environment['gems'] = `bundle show`
   puts environment.to_yaml
 
   if @mem_stats

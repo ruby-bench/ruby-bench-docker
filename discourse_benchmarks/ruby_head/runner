@@ -13,10 +13,10 @@ else
 fi
 
 autoconf
-./configure --disable-install-doc
+./configure --disable-install-doc --prefix=/root/.rbenv/versions/trunk
 make
 make install
-rbenv global system
+rbenv global trunk
 
 while ! exec 6<>/dev/tcp/${POSTGRES_PORT_5432_TCP_ADDR}/${POSTGRES_PORT_5432_TCP_PORT}; do
   echo "$(date) - still trying to connect to Postgres server"
@@ -39,5 +39,6 @@ mv /discourse.conf config/discourse.conf
 gem install bundler --no-ri --no-rdoc
 gem install facter
 rbenv rehash
+mv /cache /discourse/vendor/cache
 bundle install --without development:test
-ruby script/bench.rb -m -n -b 2
+ruby script/bench.rb -n -b 2
