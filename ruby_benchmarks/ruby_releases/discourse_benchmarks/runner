@@ -22,13 +22,12 @@ createdb -T template0 -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_
 pg_restore --no-owner -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres -d discourse_profile discourse_profile.dump
 
 cd discourse
-git checkout stable
 mv /bench.rb script/bench.rb
 mv /database.yml config/database.yml
 mv /discourse.conf config/discourse.conf
 gem install bundler --no-ri --no-rdoc
 gem install facter
-bundle install --without development test
+bundle install --without development:test
 
 echo "Running benchmarks with Ruby $RUBY_VERSION"
 ruby script/bench.rb -m -n -b 5

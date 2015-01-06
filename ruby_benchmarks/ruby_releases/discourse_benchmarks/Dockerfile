@@ -4,7 +4,7 @@ MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 # Required for Discourse bench
 RUN apt-get install wget
 
-RUN git clone --verbose https://github.com/rails-bench/discourse.git
+RUN git clone --branch stable --single-branch --verbose https://github.com/ruby-bench/discourse.git
 
 # Patched Discourse bench.rb to POST results
 ADD bench.rb bench.rb
