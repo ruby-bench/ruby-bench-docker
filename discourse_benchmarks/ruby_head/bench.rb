@@ -262,7 +262,7 @@ begin
 
   results.each do |category, result|
     puts "Posting results to Web UI...."
-    http = Net::HTTP.new('railsbench.herokuapp.com')
+    http = Net::HTTP.new('rubybench.org')
     request = Net::HTTP::Post.new('/benchmark_runs')
 
     form_results = {}
@@ -276,7 +276,7 @@ begin
       'benchmark_run[category]' => "discourse_ruby_trunk_#{category}",
       'benchmark_run[environment]' => environment.to_yaml,
       'benchmark_run[unit]' => 'milliseconds',
-      'benchmark_run[script_url]' => "https://raw.githubusercontent.com/rails-bench/discourse/stable/script/bench.rb",
+      'benchmark_run[script_url]' => "https://raw.githubusercontent.com/ruby-bench/discourse/stable/script/bench.rb",
       'commit_hash' => ENV['RUBY_COMMIT_HASH'],
       'repo' => 'ruby',
       'organization' => 'tgxworld'
