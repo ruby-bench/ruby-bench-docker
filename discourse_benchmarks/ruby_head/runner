@@ -44,5 +44,5 @@ gem install bundler --no-ri --no-rdoc
 gem install facter
 rbenv rehash
 mv /cache /discourse/vendor/cache
-bundle install --without development:test
+bundle install --without development:test -j4
 ruby script/bench.rb -n -b 2
