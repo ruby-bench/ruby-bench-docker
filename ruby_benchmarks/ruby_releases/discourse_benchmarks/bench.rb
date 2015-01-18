@@ -276,7 +276,7 @@ begin
       'benchmark_run[category]' => "discourse_#{category}",
       'benchmark_run[environment]' => environment.to_yaml,
       'benchmark_run[unit]' => 'milliseconds',
-      'benchmark_run[script_url]' => "https://raw.githubusercontent.com/ruby-bench/discourse/stable/script/bench.rb",
+      'benchmark_run[script_url]' => "https://raw.githubusercontent.com/discourse/discourse/stable/script/bench.rb",
       'ruby_version' => ENV['RUBY_VERSION'],
       'repo' => 'ruby',
       'organization' => 'tgxworld'
