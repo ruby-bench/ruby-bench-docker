@@ -139,11 +139,11 @@ class BenchmarkDriver
       request.basic_auth(ENV["API_NAME"], ENV["API_PASSWORD"])
 
       request.set_form_data({
-        'benchmark_run[category]' => "#{v}_memory",
+        'benchmark_type[category]' => "#{v}_memory",
+        'benchmark_type[unit]' => 'kilobytes',
+        'benchmark_type[script_url]' => "#{RAW_URL}#{v}.rb",
         "benchmark_run[result][rss_kb]" => rets,
         'benchmark_run[environment]' => @execs.map { |(_,v)| v }.first,
-        'benchmark_run[unit]' => 'Kilobytes',
-        'benchmark_run[script_url]' => "#{RAW_URL}#{v}.rb",
         'ruby_version' => ENV['RUBY_VERSION'],
         'repo' => 'ruby',
         'organization' => 'tgxworld'
