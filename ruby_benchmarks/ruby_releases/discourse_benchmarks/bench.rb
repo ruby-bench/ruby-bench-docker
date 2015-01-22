@@ -273,10 +273,10 @@ begin
     request.basic_auth(ENV["API_NAME"], ENV["API_PASSWORD"])
 
     request.set_form_data({
-      'benchmark_run[category]' => "discourse_#{category}",
+      'benchmark_type[category]' => "discourse_#{category}",
+      'benchmark_type[unit]' => 'milliseconds',
+      'benchmark_type[script_url]' => "https://raw.githubusercontent.com/discourse/discourse/stable/script/bench.rb",
       'benchmark_run[environment]' => environment.to_yaml,
-      'benchmark_run[unit]' => 'milliseconds',
-      'benchmark_run[script_url]' => "https://raw.githubusercontent.com/discourse/discourse/stable/script/bench.rb",
       'ruby_version' => ENV['RUBY_VERSION'],
       'repo' => 'ruby',
       'organization' => 'tgxworld'
