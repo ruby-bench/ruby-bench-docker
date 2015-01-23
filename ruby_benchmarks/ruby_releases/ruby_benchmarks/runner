@@ -11,4 +11,4 @@ echo "Checking RUBY_VERSION in environment"
 echo "RUBY_VERSION=$RUBY_VERSION"
 
 echo "Running benchmarks with Ruby $RUBY_VERSION"
-ruby ruby/benchmark/driver.rb --executables ruby -v --repeat-count 2
+ruby ruby/benchmark/driver.rb --executables ruby --repeat-count 2
