@@ -15,8 +15,8 @@ fi
 
 autoconf
 ./configure --disable-install-doc --quiet
-make --quiet
-make install --quiet
+make --quiet -j
+make install --quiet -j
 rbenv global system
 
 cd /
