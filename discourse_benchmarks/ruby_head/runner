@@ -13,9 +13,9 @@ else
 fi
 
 autoconf
-./configure --disable-install-doc --prefix=/root/.rbenv/versions/trunk
-make
-make install
+./configure --disable-install-doc --prefix=/root/.rbenv/versions/trunk --quiet
+make --quiet
+make install --quiet
 rbenv global trunk
 
 while ! exec 6<>/dev/tcp/${POSTGRES_PORT_5432_TCP_ADDR}/${POSTGRES_PORT_5432_TCP_PORT}; do

@@ -14,9 +14,9 @@ else
 fi
 
 autoconf
-./configure --disable-install-doc
-make
-make install
+./configure --disable-install-doc --quiet
+make --quiet
+make install --quiet
 rbenv global system
 
 cd /
