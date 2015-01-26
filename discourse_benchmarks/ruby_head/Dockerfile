@@ -13,6 +13,8 @@ ADD discourse_profile.dump discourse_profile.dump
 ADD bench.rb bench.rb
 ADD cache cache
 ADD runner runner
+ADD config.sub /ruby/tool/config.sub
+ADD config.guess /ruby/tool/config.guess
 RUN chmod 755 runner
 
 CMD /bin/bash -l -c "./runner"
