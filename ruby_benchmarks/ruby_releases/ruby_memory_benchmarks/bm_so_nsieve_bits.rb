@@ -7,8 +7,6 @@
 # nsieve-bits in Ruby
 # Contributed by Glenn Parker, March 2005
 
-mem_start = `ps -o rss= -p #{$$}`.to_i
-
 CharExponent = 3
 BitsPerChar = 1 << CharExponent
 LowMask = BitsPerChar - 1
@@ -43,5 +41,5 @@ n.step(n - 2, -1) do |exponent|
   printf "Primes up to %8d %8d\n", m, count
 end
 
-mem_end = `ps -o rss= -p #{$$}`.to_i
-puts "mem_result:#{mem_end - mem_start}"
+mem = `ps -o rss= -p #{$$}`.to_i
+puts "mem_result:#{mem}"

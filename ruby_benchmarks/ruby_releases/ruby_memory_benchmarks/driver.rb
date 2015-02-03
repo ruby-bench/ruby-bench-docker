@@ -224,20 +224,14 @@ class BenchmarkDriver
 
     if !(file.match(/so_nsieve_bits/))
       File.copy_stream(file, "#{file}.temp")
-      begin
-        f = File.open(file,'w')
-        temp_file_read = File.open("#{file}.temp", 'r').read
-        f.write("mem_start = `ps -o rss= -p \#\{$$\}`.to_i\n#{temp_file_read}")
-      ensure
-        f.close
-      end
+      temp_file_read = File.open("#{file}.temp", 'r').read
 
       if temp_file_read.match(/__END__/)
         begin
           temp = Tempfile.new("extract")
           File.open(file, 'r').each do |line|
             if line.match(/__END__/)
-              temp << "mem_end = `ps -o rss= -p \#\{$$\}`.to_i\nputs \"mem_result:\#\{mem_end - mem_start\}\"\n__END__\n"
+              temp << "mem = `ps -o rss= -p \#\{$$\}`.to_i\nputs \"mem_result:\#\{mem\}\"\n__END__\n"
             else
               temp << line
             end
@@ -248,8 +242,8 @@ class BenchmarkDriver
         File.copy_stream(temp, file)
       else
         File.open(file, 'a') do |f|
-          f << "mem_end = `ps -o rss= -p \#\{$$\}`.to_i\n"
-          f << "puts \"mem_result:\#\{mem_end - mem_start\}\""
+          f << "mem = `ps -o rss= -p \#\{$$\}`.to_i\n"
+          f << "puts \"mem_result:\#\{mem\}\""
         end
       end
     end
