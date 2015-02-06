@@ -1,8 +1,11 @@
 # !/bin/bash
 set -e
 
-cd ruby
+cd /ruby-bench-suite
+git fetch origin
+git rebase origin/master
 
+cd /ruby
 git fetch origin
 git rebase origin/trunk
 
@@ -20,8 +23,15 @@ make install --quiet -j
 rbenv global system
 
 cd /
-mv driver.rb ruby/benchmark/driver.rb
-mv prepare_so_k_nucleotide.rb ruby/benchmark/prepare_so_k_nucleotide.rb
-mv prepare_so_reverse_complement.rb ruby/benchmark/prepare_so_reverse_complement.rb
 
-ruby ruby/benchmark/driver.rb --executables ruby --repeat-count 1
+if [ "$RUBY_BENCHMARKS" = true ]; then
+  ruby /ruby-bench-suite/ruby/benchmarks/driver.rb --executables ruby --repeat-count 1
+else
+  echo "Skipping Ruby benchmarks"
+fi
+
+if [ "$RUBY_MEMORY_BENCHMARKS" = true ]; then
+  ruby /ruby-bench-suite/ruby/benchmarks/memory_driver.rb --executables ruby --repeat-count 1
+else
+  echo "Skipping Ruby memory benchmarks"
+fi

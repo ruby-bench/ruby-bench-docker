@@ -9,7 +9,13 @@ sudo docker build --no-cache -t tgxworld/ruby_bench .
 
 #### Run Ruby benchmarks
 ```bash
-sudo docker run --rm -e "RUBY_COMMIT_HASH=<commit sha1>" -e "API_NAME=<API NAME>" -e "API_PASSWORD=<API PASSWORD>" tgxworld/ruby_bench
+sudo docker run --rm \
+  -e "RUBY_BENCHMARKS=true" \
+  -e "RUBY_MEMORY_BENCHMARKS=true" \
+  -e "RUBY_COMMIT_HASH=<commit sha1>" \
+  -e "API_NAME=<API NAME>" \
+  -e "API_PASSWORD=<API PASSWORD>" \
+  tgxworld/ruby_bench
 ```
 ## Ruby Releases
 
