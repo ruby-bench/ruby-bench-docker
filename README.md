@@ -29,7 +29,13 @@ sudo docker build --no-cache -t tgxworld/ruby_releases .
 
 #### Run Ruby benchmarks
 ```bash
-sudo docker run --rm -e "RUBY_VERSION=<ruby version>" -e "API_NAME=<API NAME>" -e "API_PASSWORD=<API PASSWORD>" tgxworld/ruby_releases
+sudo docker run --rm \
+  -e "RUBY_BENCHMARKS=true" \
+  -e "RUBY_MEMORY_BENCHMARKS=true" \
+  -e "RUBY_VERSION=<ruby version>" \
+  -e "API_NAME=<API NAME>" \
+  -e "API_PASSWORD=<API PASSWORD>" \
+  tgxworld/ruby_releases
 ```
 
 ### Discourse Benchmarks
