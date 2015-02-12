@@ -236,7 +236,6 @@ begin
   environment = environment.merge({
     "Time loading Rails" => @timings['load_rails'],
     "Ruby version" => `ruby -v`,
-    "rss_kb" => mem,
   }).merge(facts)
 
   if @unicorn
@@ -259,6 +258,27 @@ begin
       f.write(results)
     end
   end
+
+  puts "Posting memory results to Web UI...."
+  http = Net::HTTP.new('rubybench.org')
+  request = Net::HTTP::Post.new('/benchmark_runs')
+
+  form_results = {}
+  form_results["benchmark_run[result][rss_kb]"] = mem
+
+  request.basic_auth(ENV["API_NAME"], ENV["API_PASSWORD"])
+
+  request.set_form_data({
+    'benchmark_type[category]' => "discourse_memory",
+    'benchmark_type[unit]' => 'kilobytes',
+    'benchmark_type[script_url]' => "https://raw.githubusercontent.com/discourse/discourse/stable/script/bench.rb",
+    'benchmark_run[environment]' => environment.to_yaml,
+    'ruby_version' => ENV['RUBY_VERSION'],
+    'repo' => 'ruby',
+    'organization' => 'ruby'
+  }.merge(form_results))
+
+  http.request(request)
 
   results.each do |category, result|
     puts "Posting results to Web UI...."

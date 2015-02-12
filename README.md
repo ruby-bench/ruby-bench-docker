@@ -69,7 +69,7 @@ sudo docker run --rm \
 #### Build base image for Discourse
 ```bash
 cd discourse_benchmarks/ruby_head
-sudo docker build --no-cache -t tgxworld/discourse_ruby_trunk_bench .
+sudo docker build --no-cache -t tgxworld/ruby_bench_discourse .
 ```
 
 #### Setup containers for Redis server and PostgreSQL
@@ -85,7 +85,7 @@ sudo docker run --rm \
   -e "RUBY_COMMIT_HASH=<ruby commit sha1>" \
   -e "API_NAME=<API NAME>" \
   -e "API_PASSWORD=<API PASSWORD>" \
-  tgxworld/discourse_ruby_trunk_bench
+  tgxworld/ruby_bench_discourse
 ```
 
 ## Benchmarking Discourse against Rails head
