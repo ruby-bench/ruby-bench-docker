@@ -36,4 +36,4 @@ mv /cache /discourse/vendor/cache
 bundle install --without development:test -j4
 
 echo "Running benchmarks with Ruby $RUBY_VERSION"
-ruby script/bench.rb -m -n -b 5
+ruby script/bench.rb -m -n -b 2
