@@ -13,16 +13,26 @@ git rebase origin/master
 
 cd /
 
+if [ "$INCLUDE_PATTERNS" ]; then
+  PATTERNS="--pattern $INCLUDE_PATTERNS"
+fi
+
 if [ "$RUBY_BENCHMARKS" = true ]; then
   echo "Running benchmarks with Ruby $RUBY_VERSION"
-  ruby /ruby-bench-suite/ruby/benchmarks/driver.rb --executables ruby --repeat-count 2
+  ruby /ruby-bench-suite/ruby/benchmarks/driver.rb \
+    --executables ruby \
+    --repeat-count 2 \
+    $PATTERNS
 else
   echo "Skipping Ruby benchmarks"
 fi
 
 if [ "$RUBY_MEMORY_BENCHMARKS" = true ]; then
   echo "Running memory benchmarks with Ruby $RUBY_VERSION"
-  ruby /ruby-bench-suite/ruby/benchmarks/memory_driver.rb --executables ruby --repeat-count 2
+  ruby /ruby-bench-suite/ruby/benchmarks/memory_driver.rb \
+    --executables ruby \
+    --repeat-count 2 \
+    $PATTERNS
 else
   echo "Skipping Ruby memory benchmarks"
 fi

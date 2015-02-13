@@ -15,6 +15,7 @@ sudo docker run --rm \
   -e "RUBY_COMMIT_HASH=<commit sha1>" \
   -e "API_NAME=<API NAME>" \
   -e "API_PASSWORD=<API PASSWORD>" \
+  -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>"
   tgxworld/ruby_bench
 ```
 ## Ruby Releases
@@ -35,6 +36,7 @@ sudo docker run --rm \
   -e "RUBY_VERSION=<ruby version>" \
   -e "API_NAME=<API NAME>" \
   -e "API_PASSWORD=<API PASSWORD>" \
+  -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>"
   tgxworld/ruby_releases
 ```
 
