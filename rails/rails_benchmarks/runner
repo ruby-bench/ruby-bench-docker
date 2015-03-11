@@ -1,0 +1,35 @@
+# !/bin/bash
+set -e
+
+cd /ruby-bench-suite
+git fetch origin
+git rebase origin/full-rails-stack
+
+cd /rails
+git fetch origin
+git rebase origin/master
+
+if [ -z "$RAILS_COMMIT_HASH" ]; then
+  echo "Running benchmarks using lastest Rails commit"
+else
+  echo "Running benchmarks using Rails commit $RAILS_COMMIT_HASH"
+  git reset --hard $RAILS_COMMIT_HASH
+fi
+
+cd /
+
+dropdb -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres railsbench
+createdb -T template0 -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres railsbench
+
+# TODO create mysql db
+
+mkdir -p script
+mv /bench.rb script/bench.rb
+
+# For faster Bundle install
+# echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+# gem install bundler
+# rbenv rehash
+# bundle install
+ruby script/bench.rb
+
