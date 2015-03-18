@@ -1,4 +1,4 @@
-FROM tgxworld/ruby:0.1
+FROM rubybench/ruby:0.1
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
 # Required for Discourse bench
