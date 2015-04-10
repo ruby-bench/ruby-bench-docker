@@ -1,3 +1,4 @@
+# rubybench/rubybench:0.2
 FROM ubuntu:14.04
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
@@ -11,5 +12,5 @@ ENV PATH /root/.rbenv/bin:$PATH
 RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh # or /etc/profile
 RUN echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 
-RUN /bin/bash -l -c "rbenv install 2.2.0"
-RUN /bin/bash -l -c "rbenv global 2.2.0"
+RUN /bin/bash -l -c "rbenv install 2.2.1"
+RUN /bin/bash -l -c "rbenv global 2.2.1"
