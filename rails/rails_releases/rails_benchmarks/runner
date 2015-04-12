@@ -11,4 +11,5 @@ gem install bundler --no-ri --no-rdoc
 bundle install -j4
 
 echo 'Running benchmarks with Rails $RAILS_VERSION'
-ruby /ruby-bench-suite/rails/benchmarks/driver.rb
+cd /ruby-bench-suite/rails/benchmarks
+ruby driver.rb
