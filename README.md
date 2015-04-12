@@ -113,3 +113,22 @@ sudo docker run --rm \
   -e "API_PASSWORD=<API PASSWORD>" \
   rubybench/discourse_rails_head_bench
 ```
+
+# Rails Benchmarks
+
+## Rails Releases
+
+#### Build base image
+```bash
+cd rails/rails_releases/rails_benchmarks
+sudo docker build --no-cache -t rubybench/rails_releases .
+```
+
+#### Run benchmakrs
+```bash
+sudo docker run --rm \
+  -e "RAILS_VERSION=<Rails version>" \
+  -e "API_NAME=<API NAME>" \
+  -e "API_PASSWORD=<API PASSWORD>" \
+  rubybench/rails_releases
+```
