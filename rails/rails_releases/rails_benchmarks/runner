@@ -12,4 +12,4 @@ bundle install -j4
 
 echo 'Running benchmarks with Rails $RAILS_VERSION'
 cd /ruby-bench-suite/rails/benchmarks
-ruby driver.rb
+ruby driver.rb -r 2
