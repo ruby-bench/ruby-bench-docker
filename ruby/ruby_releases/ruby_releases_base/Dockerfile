@@ -28,6 +28,7 @@ RUN /bin/bash -l -c "rbenv install 2.1.2"
 RUN /bin/bash -l -c "rbenv install 2.1.3"
 RUN /bin/bash -l -c "rbenv install 2.1.4"
 RUN /bin/bash -l -c "rbenv install 2.1.5"
+RUN /bin/bash -l -c "rbenv install 2.1.6"
 
 RUN /bin/bash -l -c "rbenv install 2.2.0"
 RUN /bin/bash -l -c "rbenv install 2.2.1"
