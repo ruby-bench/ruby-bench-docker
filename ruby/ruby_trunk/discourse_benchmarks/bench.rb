@@ -299,7 +299,7 @@ begin
       'benchmark_run[environment]' => environment.to_yaml,
       'commit_hash' => ENV['RUBY_COMMIT_HASH'],
       'repo' => 'ruby',
-      'organization' => 'tgxworld'
+      'organization' => 'ruby'
     }.merge(form_results))
 
     http.request(request)

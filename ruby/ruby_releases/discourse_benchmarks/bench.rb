@@ -273,7 +273,7 @@ begin
     'benchmark_type[unit]' => 'kilobytes',
     'benchmark_type[script_url]' => "https://raw.githubusercontent.com/discourse/discourse/stable/script/bench.rb",
     'benchmark_run[environment]' => environment.to_yaml,
-    'ruby_version' => ENV['RUBY_VERSION'],
+    'version' => ENV['RUBY_VERSION'],
     'repo' => 'ruby',
     'organization' => 'ruby'
   }.merge(form_results))
@@ -297,9 +297,9 @@ begin
       'benchmark_type[unit]' => 'milliseconds',
       'benchmark_type[script_url]' => "https://raw.githubusercontent.com/discourse/discourse/stable/script/bench.rb",
       'benchmark_run[environment]' => environment.to_yaml,
-      'ruby_version' => ENV['RUBY_VERSION'],
+      'version' => ENV['RUBY_VERSION'],
       'repo' => 'ruby',
-      'organization' => 'tgxworld'
+      'organization' => 'ruby'
     }.merge(form_results))
 
     http.request(request)
