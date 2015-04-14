@@ -16,17 +16,11 @@ RUN /bin/bash -l -c "rbenv install 1.9.3-p547"
 RUN /bin/bash -l -c "rbenv install 1.9.3-p550"
 RUN /bin/bash -l -c "rbenv install 1.9.3-p551"
 
-RUN /bin/bash -l -c "rbenv install 2.0.0-p576"
-RUN /bin/bash -l -c "rbenv install 2.0.0-p594"
 RUN /bin/bash -l -c "rbenv install 2.0.0-p598"
 RUN /bin/bash -l -c "rbenv install 2.0.0-p643"
 RUN /bin/bash -l -c "rbenv install 2.0.0-p645"
 
 # See https://github.com/sstephenson/ruby-build/issues/526#issuecomment-37933242
-RUN /bin/bash -l -c "curl -fsSL https://gist.github.com/mislav/a18b9d7f0dc5b9efc162.txt | rbenv install --patch 2.1.0"
-RUN /bin/bash -l -c "curl -fsSL https://gist.github.com/mislav/a18b9d7f0dc5b9efc162.txt | rbenv install --patch 2.1.1"
-RUN /bin/bash -l -c "rbenv install 2.1.2"
-RUN /bin/bash -l -c "rbenv install 2.1.3"
 RUN /bin/bash -l -c "rbenv install 2.1.4"
 RUN /bin/bash -l -c "rbenv install 2.1.5"
 RUN /bin/bash -l -c "rbenv install 2.1.6"
