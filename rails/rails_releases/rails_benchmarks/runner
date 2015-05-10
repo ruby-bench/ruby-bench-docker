@@ -1,6 +1,19 @@
 #!/bin/bash
 set -e
 
+while ! exec 6<>/dev/tcp/${POSTGRES_PORT_5432_TCP_ADDR}/${POSTGRES_PORT_5432_TCP_PORT}; do
+  echo "$(date) - still trying to connect to Postgres server"
+  sleep 1
+done
+
+while ! exec 6<>/dev/tcp/${MYSQL_PORT_3306_TCP_ADDR}/${MYSQL_PORT_3306_TCP_PORT}; do
+  echo "$(date) - still trying to connect to Mysql server"
+  sleep 1
+done
+
+createdb -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres rubybench
+echo "CREATE DATABASE rubybench" | mysql -u root -h "$MYSQL_PORT_3306_TCP_ADDR" -P "MYSQL_PORT_3306_TCP_PORT"
+
 cd /ruby-bench-suite/rails
 git pull --rebase origin master
 
