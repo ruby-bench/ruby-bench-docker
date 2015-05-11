@@ -124,9 +124,17 @@ cd rails/rails_releases/rails_benchmarks
 sudo docker build --no-cache -t rubybench/rails_releases .
 ```
 
+#### Setup containers for PostgreSQL and MySQL
+```
+sudo docker run --name postgres -d postgres:9.3.5 && \
+sudo docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSOWRD=yes" -d mysql:5.6.24
+```
+
 #### Run benchmakrs
 ```bash
 sudo docker run --rm \
+  --link postgres:postgres \
+  --link mysql:mysql \
   -e "RAILS_VERSION=<Rails version>" \
   -e "API_NAME=<API NAME>" \
   -e "API_PASSWORD=<API PASSWORD>" \

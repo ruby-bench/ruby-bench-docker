@@ -2,7 +2,7 @@ FROM rubybench/ruby:0.2
 MAINTAINER Alan Guo Xiang Tan "https://twitter.com/tgx_world"
 
 RUN apt-get update
-RUN apt-get install -y libmysqlclient-dev sqlite3 libsqlite3-dev postgresql
+RUN apt-get install -y libmysqlclient-dev sqlite3 libsqlite3-dev postgresql mysql-server-5.6
 
 RUN git clone --verbose --branch master --single-branch https://github.com/ruby-bench/ruby-bench-suite.git
 
