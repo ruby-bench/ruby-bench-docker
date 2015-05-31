@@ -22,18 +22,18 @@ createdb -T template0 -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_
 pg_restore --no-owner -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres -d discourse_profile discourse_profile.dump
 
 cd discourse
-# Reset Discourse master to a fixed commit.
-git reset --hard c0b0b726c70a9777303e53e1ce53e293eded73af
+# Discourse stable v1.2.4
+git reset --hard 4e187334b3c2485737a44c76e04eda0c22c1d40e
 mv /bench.rb script/bench.rb
 mv /database.yml config/database.yml
 mv /discourse.conf config/discourse.conf
 
 # For faster Bundle install
 echo "gem: --no-ri --no-rdoc" > ~/.gemrc
-gem install bundler
-gem install facter
+gem install bundler facter
+rbenv rehash
 mv /cache /discourse/vendor/cache
-bundle install --without development:test -j4
+bundle install --without development:test -j4 --local
 
 echo "Running benchmarks with Ruby $RUBY_VERSION"
 ruby script/bench.rb -m -n -b 2
