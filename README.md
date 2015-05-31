@@ -90,30 +90,6 @@ sudo docker run --rm \
   rubybench/ruby_trunk_discourse
 ```
 
-## Benchmarking Discourse against Rails head
-
-#### Build base image for Discourse
-```bash
-cd discourse_benchmarks/rails_head
-sudo docker build --no-cache -t rubybench/discourse_rails_head_bench .
-```
-
-#### Setup containers for Redis server and PostgreSQL
-```bash
-sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name discourse_postgres -d postgres:9.3.5
-```
-
-#### Run benchmarks
-```bash
-sudo docker run --rm \
-  --link discourse_postgres:postgres \
-  --link discourse_redis:redis \
-  -e "RAILS_COMMIT_HASH=<rails commit sha1>" \
-  -e "API_NAME=<API NAME>" \
-  -e "API_PASSWORD=<API PASSWORD>" \
-  rubybench/discourse_rails_head_bench
-```
-
 # Rails Benchmarks
 
 ## Rails Releases
