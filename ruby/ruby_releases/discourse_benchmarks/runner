@@ -33,7 +33,7 @@ echo "gem: --no-ri --no-rdoc" > ~/.gemrc
 gem install bundler facter
 rbenv rehash
 mv /cache /discourse/vendor/cache
-bundle install --without development:test -j4 --local
+bundle install --without development:test -j4
 
 echo "Running benchmarks with Ruby $RUBY_VERSION"
 ruby script/bench.rb -m -n -b 2
