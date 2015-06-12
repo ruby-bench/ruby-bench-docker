@@ -2,8 +2,7 @@
 set -e
 
 cd ruby
-git fetch origin
-git rebase origin/trunk
+git pull --rebase origin trunk
 
 if [ -z "$RUBY_COMMIT_HASH" ]; then
   echo "Running benchmarks using lastest Ruby commit"
@@ -44,5 +43,5 @@ echo "gem: --no-ri --no-rdoc" > ~/.gemrc
 gem install bundler facter
 rbenv rehash
 mv /cache /discourse/vendor/cache
-bundle install --without development:test -j4 --local
-ruby script/bench.rb -n -b 2
+bundle install --without development:test -j4
+ruby script/bench.rb -m -n -b 2

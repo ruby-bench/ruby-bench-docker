@@ -1,20 +1,24 @@
-FROM rubybench/ruby:0.1
+FROM rubybench/ruby:0.2
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
 # Required for Discourse bench
 RUN apt-get install wget
 
-RUN git clone --verbose --branch master --single-branch https://github.com/discourse/discourse.git
+RUN git clone --branch stable --single-branch --verbose https://github.com/discourse/discourse.git
 RUN git clone --verbose --branch trunk --single-branch https://github.com/ruby/ruby.git
 
+# Patched Discourse bench.rb to POST results
+ADD bench.rb bench.rb
+
+# Discourse configuration files
 ADD database.yml database.yml
 ADD discourse.conf discourse.conf
 ADD discourse_profile.dump discourse_profile.dump
-ADD bench.rb bench.rb
 ADD cache cache
-ADD runner runner
 ADD config.sub /ruby/tool/config.sub
 ADD config.guess /ruby/tool/config.guess
+
+ADD runner runner
 RUN chmod 755 runner
 
 CMD /bin/bash -l -c "./runner"
