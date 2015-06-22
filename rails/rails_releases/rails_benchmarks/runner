@@ -20,6 +20,10 @@ echo "CREATE DATABASE rubybench" | mysql -u root -h "$MYSQL_PORT_3306_TCP_ADDR" 
 cd /ruby-bench-suite/rails
 git pull --rebase origin master
 
+if [ "$INCLUDE_PATTERNS" ]; then
+  PATTERNS="--pattern $INCLUDE_PATTERNS"
+fi
+
 echo "Using Rails $RAILS_VERSION"
 sed -i "s/gem 'rails', path: '\/rails'/gem 'rails', '$RAILS_VERSION'/g" Gemfile
 
@@ -28,4 +32,4 @@ bundle install -j4
 
 echo "Running benchmarks with Rails $RAILS_VERSION"
 cd /ruby-bench-suite/rails/benchmarks
-ruby driver.rb -r 2
+ruby driver.rb -r 2 $PATTERNS
