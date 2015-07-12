@@ -3,12 +3,12 @@
 ## Ruby trunk
 
 #### Build base image for Ruby benchmarks
-```bash
+```
 sudo docker build --no-cache -t rubybench/ruby_trunk .
 ```
 
 #### Run Ruby benchmarks
-```bash
+```
 sudo docker run --rm \
   -e "RUBY_BENCHMARKS=true" \
   -e "RUBY_MEMORY_BENCHMARKS=true" \
@@ -23,13 +23,13 @@ sudo docker run --rm \
 ### Ruby Benchmarks
 
 #### Build base image for Ruby benchmarks
-```bash
+```
 sudo docker build --no-cache -t rubybench/ruby_releases_base .
 sudo docker build --no-cache -t rubybench/ruby_releases .
 ```
 
 #### Run Ruby benchmarks
-```bash
+```
 sudo docker run --rm \
   -e "RUBY_BENCHMARKS=true" \
   -e "RUBY_MEMORY_BENCHMARKS=true" \
@@ -43,18 +43,18 @@ sudo docker run --rm \
 ### Discourse Benchmarks
 
 #### Build base image for Discourse benchmarks
-```bash
+```
 sudo docker build --no-cache -t rubybench/ruby_releases_base .
 sudo docker build --no-cache -t rubybench/ruby_releases_discourse .
 ```
 
 #### Setup containers for Redis server and PostgreSQL
-```bash
+```
 sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name discourse_postgres -d postgres:9.3.5
 ```
 
 #### Run Discourse benchmarks
-```bash
+```
 sudo docker run --rm \
   --link discourse_postgres:postgres \
   --link discourse_redis:redis \
@@ -69,18 +69,18 @@ sudo docker run --rm \
 ## Benchmarking Discourse against Ruby trunk
 
 #### Build base image for Discourse
-```bash
+```
 cd discourse_benchmarks/ruby_head
 sudo docker build --no-cache -t rubybench/ruby_trunk_discourse .
 ```
 
 #### Setup containers for Redis server and PostgreSQL
-```bash
+```
 sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name discourse_postgres -d postgres:9.3.5
 ```
 
 #### Run benchmarks
-```bash
+```
 sudo docker run --rm \
   --link discourse_postgres:postgres \
   --link discourse_redis:redis \
@@ -95,7 +95,7 @@ sudo docker run --rm \
 ## Rails Releases
 
 #### Build base image
-```bash
+```
 cd rails/rails_releases/rails_benchmarks
 sudo docker build --no-cache -t rubybench/rails_releases .
 ```
@@ -107,7 +107,7 @@ sudo docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" -d mysql:5.6.24
 ```
 
 #### Run benchmarks
-```bash
+```
 sudo docker run --rm \
   --link postgres:postgres \
   --link mysql:mysql \
@@ -116,4 +116,30 @@ sudo docker run --rm \
   -e "API_PASSWORD=<API PASSWORD>" \
   -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>" \
   rubybench/rails_releases
+```
+
+## Rails Trunk
+
+#### Build base image
+```
+cd rails/rails_trunk/rails_benchmarks
+sudo docker build --no-cache -t rubybench/rails_trunk .
+```
+
+#### Setup containers for PostgreSQL and MySQL
+```
+sudo docker run --name postgres -d postgres:9.3.5 && \
+sudo docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" -d mysql:5.6.24
+```
+
+#### Run benchmarks
+```
+sudo docker run --rm \
+  --link postgres:postgres \
+  --link mysql:mysql \
+  -e "RAILS_COMMIT_HASH=<commit sha1>" \
+  -e "API_NAME=<API NAME>" \
+  -e "API_PASSWORD=<API PASSWORD>" \
+  -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>" \
+  rubybench/rails_trunk
 ```

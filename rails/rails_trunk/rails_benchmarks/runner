@@ -23,12 +23,21 @@ if [ "$INCLUDE_PATTERNS" ]; then
   PATTERNS="--pattern $INCLUDE_PATTERNS"
 fi
 
-echo "Using Rails $RAILS_VERSION"
-sed -i "s/gem 'rails', path: '\/rails'/gem 'rails', '$RAILS_VERSION'/g" Gemfile
+cd /rails
+git pull --rebase origin master
 
-gem install bundler --no-ri --no-rdoc
+if [ -z "$RAILS_COMMIT_HASH" ]; then
+  echo "Running benchmarks using lastest Rails commit"
+else
+  echo "Running benchmarks using Rails commit $RAILS_COMMIT_HASH"
+  git reset --hard $RAILS_COMMIT_HASH
+  bundle install -j4
+fi
+
+cd /ruby-bench-suite/rails
+sed -i "s/gem 'rails', github: 'rails'/gem 'rails', path: '\/rails'/g" Gemfile
 bundle install -j4
 
-echo "Running benchmarks with Rails $RAILS_VERSION"
+echo "Running benchmarks with Rails $RAILS_COMMIT_HASH"
 cd /ruby-bench-suite/rails/benchmarks
-ruby driver.rb -r 2 $PATTERNS
+ruby driver.rb $PATTERNS

@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 set -e
 
 while ! exec 6<>/dev/tcp/${POSTGRES_PORT_5432_TCP_ADDR}/${POSTGRES_PORT_5432_TCP_PORT}; do
