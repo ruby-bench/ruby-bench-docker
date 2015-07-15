@@ -31,7 +31,7 @@ if [ -z "$RAILS_COMMIT_HASH" ]; then
 else
   echo "Running benchmarks using Rails commit $RAILS_COMMIT_HASH"
   git reset --hard $RAILS_COMMIT_HASH
-  bundle install -j4
+  bundle install -j4 --without test job doc
 fi
 
 cd /ruby-bench-suite/rails
