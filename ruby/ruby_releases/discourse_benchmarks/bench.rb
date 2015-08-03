@@ -271,7 +271,7 @@ begin
   request.set_form_data({
     'benchmark_type[category]' => "discourse_memory_usage",
     'benchmark_type[unit]' => 'kilobytes',
-    'benchmark_type[script_url]' => "https://raw.githubusercontent.com/discourse/discourse/stable/script/bench.rb",
+    'benchmark_type[script_url]' => "https://raw.githubusercontent.com/discourse/discourse/#{ENV['DISCOURSE_COMMIT_HASH']}/script/bench.rb",
     'benchmark_run[environment]' => environment.to_yaml,
     'version' => ENV['RUBY_VERSION'],
     'repo' => 'ruby',
@@ -295,7 +295,7 @@ begin
     request.set_form_data({
       'benchmark_type[category]' => "discourse_#{category}",
       'benchmark_type[unit]' => 'milliseconds',
-      'benchmark_type[script_url]' => "https://raw.githubusercontent.com/discourse/discourse/stable/script/bench.rb",
+      'benchmark_type[script_url]' => "https://raw.githubusercontent.com/discourse/discourse/#{ENV['DISCOURSE_COMMIT_HASH']}/script/bench.rb",
       'benchmark_run[environment]' => environment.to_yaml,
       'version' => ENV['RUBY_VERSION'],
       'repo' => 'ruby',

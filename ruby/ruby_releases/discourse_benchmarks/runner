@@ -22,8 +22,7 @@ createdb -T template0 -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_
 pg_restore --no-owner -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres -d discourse_profile discourse_profile.dump
 
 cd discourse
-# Discourse stable v1.2.4
-git reset --hard 4e187334b3c2485737a44c76e04eda0c22c1d40e
+git reset --hard $DISCOURSE_COMMIT_HASH
 mv /bench.rb script/bench.rb
 mv /database.yml config/database.yml
 mv /discourse.conf config/discourse.conf
