@@ -1,8 +1,11 @@
 #!/bin/bash
 set -e
 
-cd ruby
+cd /ruby
 git pull --rebase origin trunk
+
+cd /ruby-bench-suite
+git pull --rebase origin master
 
 if [ -z "$RUBY_COMMIT_HASH" ]; then
   echo "Running benchmarks using lastest Ruby commit"
@@ -33,7 +36,7 @@ pg_restore --no-owner -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_
 
 cd discourse
 git reset --hard $DISCOURSE_COMMIT_HASH
-mv /bench.rb script/bench.rb
+mv /ruby-bench-suite/discourse/benchmarks/bench.rb script/bench.rb
 mv /database.yml config/database.yml
 mv /discourse.conf config/discourse.conf
 

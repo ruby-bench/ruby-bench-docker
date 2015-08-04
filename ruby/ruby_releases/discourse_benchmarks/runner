@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+cd /ruby-bench-suite
+git pull --rebase origin master
+
 while ! exec 6<>/dev/tcp/${POSTGRES_PORT_5432_TCP_ADDR}/${POSTGRES_PORT_5432_TCP_PORT}; do
   echo "$(date) - still trying to connect to Postgres server"
   sleep 1
@@ -23,9 +26,9 @@ pg_restore --no-owner -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_
 
 cd discourse
 git reset --hard $DISCOURSE_COMMIT_HASH
-mv /bench.rb script/bench.rb
 mv /database.yml config/database.yml
 mv /discourse.conf config/discourse.conf
+mv /ruby-bench-suite/discourse/benchmarks/bench.rb script/bench.rb
 
 # For faster Bundle install
 echo "gem: --no-ri --no-rdoc" > ~/.gemrc
