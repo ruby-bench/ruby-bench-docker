@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e
 
-cd /ruby
-git pull --rebase origin trunk
-
 cd /ruby-bench-suite
 git pull --rebase origin master
+
+cd /ruby
+git pull --rebase origin trunk
 
 if [ -z "$RUBY_COMMIT_HASH" ]; then
   echo "Running benchmarks using lastest Ruby commit"
