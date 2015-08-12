@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+
+cd /ruby-bench-suite/bundler
+git pull --rebase origin master
+
+if [ "$INCLUDE_PATTERNS" ]; then
+  PATTERNS="--pattern $INCLUDE_PATTERNS"
+fi
+
+echo "Using Bundler $BUNDLER_VERSION"
+echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+# Ensure we cleanup all exisiting versions of bundler.
+gem uninstall bundler --all --force
+gem install bundler -v "$BUNDLER_VERSION"
+
+# Install gem dependencies to run the benchmarks
+gem install benchmark-ips
+
+echo "Running benchmarks with Bundler $BUNDLER_VERSION"
+cd /ruby-bench-suite/bundler/benchmarks
+ruby driver.rb -r 2 $PATTERNS
