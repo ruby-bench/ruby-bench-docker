@@ -1,4 +1,4 @@
-# rubybench/rubybench:0.3
+# rubybench/ruby:0.3
 FROM ubuntu:14.04
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 

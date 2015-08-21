@@ -1,3 +1,4 @@
+# rubybench/ruby_releases_base:0.1
 FROM ubuntu:14.04
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
@@ -16,18 +17,18 @@ RUN /bin/bash -l -c "rbenv install 1.9.3-p547"
 RUN /bin/bash -l -c "rbenv install 1.9.3-p550"
 RUN /bin/bash -l -c "rbenv install 1.9.3-p551"
 
-RUN /bin/bash -l -c "rbenv install 2.0.0-p598"
 RUN /bin/bash -l -c "rbenv install 2.0.0-p643"
 RUN /bin/bash -l -c "rbenv install 2.0.0-p645"
+RUN /bin/bash -l -c "rbenv install 2.0.0-p647"
 
 # See https://github.com/sstephenson/ruby-build/issues/526#issuecomment-37933242
-RUN /bin/bash -l -c "rbenv install 2.1.4"
 RUN /bin/bash -l -c "rbenv install 2.1.5"
 RUN /bin/bash -l -c "rbenv install 2.1.6"
+RUN /bin/bash -l -c "rbenv install 2.1.7"
 
-RUN /bin/bash -l -c "rbenv install 2.2.0"
 RUN /bin/bash -l -c "rbenv install 2.2.1"
 RUN /bin/bash -l -c "rbenv install 2.2.2"
+RUN /bin/bash -l -c "rbenv install 2.2.3"
 
 # Install Github Ruby with per method cache
 RUN git clone -b 2.2 --single-branch https://github.com/github/ruby.git githubruby
