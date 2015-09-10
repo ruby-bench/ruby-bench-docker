@@ -34,6 +34,11 @@ else
   bundle install -j4 --without test job doc
 fi
 
+if [[ $(git rev-list --count $RAILS_COMMIT_HASH..51211a94bd7a34d80f2412a7f94fefe7366647a5) -gt 0 ]]; then
+  echo "called"
+  sed -i "s/gem 'rack', github: 'rack\/rack', branch: 'master'/gem 'rack'/g" /ruby-bench-suite/rails/Gemfile
+fi
+
 cd /ruby-bench-suite/rails
 sed -i "s/gem 'rails', github: 'rails'/gem 'rails', path: '\/rails'/g" Gemfile
 bundle install -j4
