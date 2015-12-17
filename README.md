@@ -70,7 +70,7 @@ sudo docker run --rm \
 
 #### Build base image for Discourse
 ```
-cd discourse_benchmarks/ruby_head
+cd ruby/ruby_trunk/discourse_benchmarks
 sudo docker build --no-cache -t rubybench/ruby_trunk_discourse .
 ```
 

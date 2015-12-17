@@ -1,4 +1,4 @@
-FROM rubybench/ruby:0.2
+FROM rubybench/ruby:0.3
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
 # Required for Discourse bench
@@ -21,5 +21,6 @@ RUN chmod 755 runner
 
 # Discourse stable v1.2.4
 ENV DISCOURSE_COMMIT_HASH 4e187334b3c2485737a44c76e04eda0c22c1d40e
+ENV RAILS_ENV profile
 
 CMD /bin/bash -l -c "./runner"

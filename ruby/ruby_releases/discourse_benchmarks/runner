@@ -3,6 +3,7 @@ set -e
 
 cd /ruby-bench-suite
 git pull --rebase origin master
+cp -r discourse/benchmarks/patches/* /discourse/config/initializers/
 
 while ! exec 6<>/dev/tcp/${POSTGRES_PORT_5432_TCP_ADDR}/${POSTGRES_PORT_5432_TCP_PORT}; do
   echo "$(date) - still trying to connect to Postgres server"
@@ -24,7 +25,7 @@ cd /
 createdb -T template0 -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres discourse_profile
 pg_restore --no-owner -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres -d discourse_profile discourse_profile.dump
 
-cd discourse
+cd /discourse
 git reset --hard $DISCOURSE_COMMIT_HASH
 mv /database.yml config/database.yml
 mv /discourse.conf config/discourse.conf
@@ -35,7 +36,7 @@ echo "gem: --no-ri --no-rdoc" > ~/.gemrc
 gem install bundler facter
 rbenv rehash
 mv /cache /discourse/vendor/cache
-bundle install --without development:test -j4
+bundle install --without development:test -j4 --no-cache --no-prune
 
 echo "Running benchmarks with Ruby $RUBY_VERSION"
 ruby script/bench.rb -m -n -b 2
