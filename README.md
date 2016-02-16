@@ -129,7 +129,8 @@ sudo docker build --no-cache -t rubybench/rails_trunk .
 #### Setup containers for PostgreSQL and MySQL
 ```
 sudo docker run --name postgres -d postgres:9.3.5 && \
-sudo docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" -d mysql:5.6.24
+sudo docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" -d mysql:5.6.24 && \
+sudo docker run --name redis -d redis:2.8.19
 ```
 
 #### Run benchmarks
@@ -137,6 +138,7 @@ sudo docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" -d mysql:5.6.24
 sudo docker run --rm \
   --link postgres:postgres \
   --link mysql:mysql \
+  --link redis:redis \
   -e "RAILS_COMMIT_HASH=<commit sha1>" \
   -e "API_NAME=<API NAME>" \
   -e "API_PASSWORD=<API PASSWORD>" \
