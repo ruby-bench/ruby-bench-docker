@@ -1,4 +1,4 @@
-# rubybench/ruby_releases_base:0.2
+# rubybench/ruby_releases_base:0.4
 FROM ubuntu:14.04
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
@@ -33,6 +33,7 @@ RUN /bin/bash -l -c "rbenv install 2.2.3"
 RUN /bin/bash -l -c "rbenv install 2.2.4"
 
 RUN /bin/bash -l -c "rbenv install 2.3.0"
+RUN /bin/bash -l -c "rbenv install 2.3.1"
 
 # Install Github Ruby with per method cache
 RUN git clone -b 2.2 --single-branch https://github.com/github/ruby.git githubruby
