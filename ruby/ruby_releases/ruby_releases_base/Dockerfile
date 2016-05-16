@@ -24,13 +24,13 @@ RUN /bin/bash -l -c "rbenv install 2.0.0-p645"
 RUN /bin/bash -l -c "rbenv install 2.0.0-p647"
 RUN /bin/bash -l -c "rbenv install 2.0.0-p648"
 
-RUN /bin/bash -l -c "rbenv install 2.1.6"
 RUN /bin/bash -l -c "rbenv install 2.1.7"
 RUN /bin/bash -l -c "rbenv install 2.1.8"
+RUN /bin/bash -l -c "rbenv install 2.1.9"
 
-RUN /bin/bash -l -c "rbenv install 2.2.2"
 RUN /bin/bash -l -c "rbenv install 2.2.3"
 RUN /bin/bash -l -c "rbenv install 2.2.4"
+RUN /bin/bash -l -c "rbenv install 2.2.5"
 
 RUN /bin/bash -l -c "rbenv install 2.3.0"
 RUN /bin/bash -l -c "rbenv install 2.3.1"
