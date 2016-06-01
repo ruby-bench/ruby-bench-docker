@@ -1,4 +1,4 @@
-# rubybench/ruby_releases_base:0.4
+# rubybench/ruby_releases_base:0.5
 FROM ubuntu:14.04
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 

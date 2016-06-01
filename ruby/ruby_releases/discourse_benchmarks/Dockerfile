@@ -1,4 +1,4 @@
-FROM rubybench/ruby_releases_base:0.4
+FROM rubybench/ruby_releases_base:0.5
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
 # Required for Discourse bench
