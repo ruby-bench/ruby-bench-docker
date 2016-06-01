@@ -16,6 +16,9 @@ createdb -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U 
 echo "DROP DATABASE IF EXISTS rubybench" | mysql -u root -h "$MYSQL_PORT_3306_TCP_ADDR" -P "MYSQL_PORT_3306_TCP_PORT"
 echo "CREATE DATABASE rubybench" | mysql -u root -h "$MYSQL_PORT_3306_TCP_ADDR" -P "MYSQL_PORT_3306_TCP_PORT"
 
+echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+gem update bundler
+
 cd /ruby-bench-suite/rails
 git pull --rebase origin master
 
@@ -35,7 +38,6 @@ else
 fi
 
 if [[ $(git rev-list --count $RAILS_COMMIT_HASH..51211a94bd7a34d80f2412a7f94fefe7366647a5) -gt 0 ]]; then
-  echo "called"
   sed -i "s/gem 'rack', github: 'rack\/rack', branch: 'master'/gem 'rack'/g" /ruby-bench-suite/rails/Gemfile
 fi
 

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: ./build <version>"
+  exit 1
+fi
+
+docker build -t rubybench/ruby:$1 .
+# docker save $img | sudo docker-squash -t rubybench/ruby:$1 -verbose -from root | docker load

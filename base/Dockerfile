@@ -2,10 +2,12 @@
 FROM ubuntu:14.04
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
-RUN apt-get update
-RUN apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev git curl libtool libxslt-dev libxml2-dev libpq-dev gawk curl pngcrush python-software-properties software-properties-common tasksel apache2-utils postgresql-client libffi-dev
+ENV LANG en_US.UTF-8
 
-RUN git config --global user.email "you@example.com" &&\
+RUN apt-get update
+RUN locale-gen en_US.UTF-8
+RUN apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev git curl libtool libxslt-dev libxml2-dev libpq-dev gawk curl pngcrush python-software-properties software-properties-common tasksel apache2-utils postgresql-client libffi-dev
+RUN git config --global user.email "you@example.com" && \
     git config --global user.name "Your Name"
 
 RUN git clone https://github.com/sstephenson/rbenv.git /root/.rbenv

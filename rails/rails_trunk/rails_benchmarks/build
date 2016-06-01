@@ -1,0 +1,6 @@
+#!/bin/bash
+docker build -t rubybench/rails_trunk .
+
+if [  $PUSH ]; then
+  docker push rubybench/rails_trunk
+fi
