@@ -1,0 +1,6 @@
+#!/bin/bash
+docker build -t rubybench/sequel_releases .
+
+if [  $PUSH ]; then
+  docker push rubybench/sequel_releases
+fi

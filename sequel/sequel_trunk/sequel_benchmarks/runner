@@ -19,32 +19,28 @@ echo "CREATE DATABASE rubybench" | mysql -u root -h "$MYSQL_PORT_3306_TCP_ADDR" 
 echo "gem: --no-ri --no-rdoc" > ~/.gemrc
 gem update bundler
 
-cd /ruby-bench-suite/rails
+cd /ruby-bench-suite/sequel
 git pull --rebase origin master
 
 if [ "$INCLUDE_PATTERNS" ]; then
   PATTERNS="--pattern $INCLUDE_PATTERNS"
 fi
 
-cd /rails
+cd /sequel
 git pull --rebase origin master
 
-if [ -z "$RAILS_COMMIT_HASH" ]; then
-  echo "Running benchmarks using latest Rails commit"
+if [ -z "$SEQUEL_COMMIT_HASH" ]; then
+  echo "Running benchmarks using latest Sequel commit"
 else
-  echo "Running benchmarks using Rails commit $RAILS_COMMIT_HASH"
-  git reset --hard $RAILS_COMMIT_HASH
+  echo "Running benchmarks using Sequel commit $SEQUEL_COMMIT_HASH"
+  git reset --hard $SEQUEL_COMMIT_HASH
   bundle install -j4 --without test job doc
 fi
 
-if [[ $(git rev-list --count $RAILS_COMMIT_HASH..51211a94bd7a34d80f2412a7f94fefe7366647a5) -gt 0 ]]; then
-  sed -i "s/gem 'rack', github: 'rack\/rack', branch: 'master'/gem 'rack'/g" /ruby-bench-suite/rails/Gemfile
-fi
-
-cd /ruby-bench-suite/rails
-sed -i "s/gem 'rails', github: 'rails'/gem 'rails', path: '\/rails'/g" Gemfile
+cd /ruby-bench-suite/sequel
+sed -i "s/gem 'sequel', github: 'jeremyevans\/sequel', branch: 'master'/gem 'sequel', path: '\/sequel'/g" Gemfile
 bundle install -j4
 
-echo "Running benchmarks with Rails $RAILS_COMMIT_HASH"
-cd /ruby-bench-suite/rails/benchmarks
+echo "Running benchmarks with Sequel $SEQUEL_COMMIT_HASH"
+cd /ruby-bench-suite/sequel/benchmarks
 ruby driver.rb $PATTERNS
