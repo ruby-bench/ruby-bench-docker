@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Build base image with appropriate tag as an argument
+sudo docker build -t rubybench/ruby_releases_base:$1 .

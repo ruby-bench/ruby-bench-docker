@@ -2,7 +2,7 @@ FROM rubybench/ruby:0.3
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
 # Required for Discourse bench
-RUN apt-get install wget
+RUN apt-get update && apt-get install wget
 
 RUN git clone --branch stable --single-branch --verbose https://github.com/discourse/discourse.git
 RUN git clone --verbose --branch trunk --single-branch https://github.com/ruby/ruby.git
