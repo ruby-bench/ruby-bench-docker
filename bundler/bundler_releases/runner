@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+cd /
+git clone --verbose --branch master --single-branch https://github.com/ruby-bench/ruby-bench-suite.git
+
 cd /ruby-bench-suite/bundler
 git pull --rebase origin master
 
@@ -15,7 +18,7 @@ gem uninstall bundler --all --force
 gem install bundler -v "$BUNDLER_VERSION"
 
 # Install gem dependencies to run the benchmarks
-gem install benchmark-ips
+gem install benchmark-ips -v 2.6.1
 
 echo "Running benchmarks with Bundler $BUNDLER_VERSION"
 cd /ruby-bench-suite/bundler/benchmarks
