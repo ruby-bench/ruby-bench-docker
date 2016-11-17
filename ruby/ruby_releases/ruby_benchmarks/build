@@ -1,4 +1,8 @@
 !#/bin/bash
 set -e
 
-docker build -t rubybench/ruby_releases . 
+docker build -t rubybench/ruby_releases .
+
+if [ -n "$PUSH" ]; then
+  docker push rubybench/ruby_releases
+fi
