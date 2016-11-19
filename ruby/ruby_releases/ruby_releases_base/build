@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "Give me a tag to build, please." >&2
+  exit 1
+fi
+
+docker build -t rubybench/ruby_releases_base:$1 .
