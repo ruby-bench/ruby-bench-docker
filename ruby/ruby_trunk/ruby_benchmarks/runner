@@ -4,6 +4,7 @@ set -e
 cd /ruby-bench-suite
 git fetch origin
 git rebase origin/master
+git submodule init
 git submodule update
 
 cd /ruby
