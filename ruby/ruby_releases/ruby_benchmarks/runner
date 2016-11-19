@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 set -e
 
 echo "Using Ruby $RUBY_VERSION"
@@ -35,4 +35,11 @@ if [ "$RUBY_MEMORY_BENCHMARKS" = true ]; then
     $PATTERNS
 else
   echo "Skipping Ruby memory benchmarks"
+fi
+
+if [ "$OPTCARROT_BENCHMARK" = true ]; then
+  echo "Running optcarrot benchmarks with Ruby $RUBY_VERSION"
+  ruby /ruby-bench-suite/optcarrot_benchmarks/driver.rb
+else
+  echo "Skipping optcarrot benchmarks"
 fi

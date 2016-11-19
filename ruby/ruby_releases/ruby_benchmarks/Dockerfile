@@ -1,4 +1,4 @@
-FROM rubybench/ruby_releases_base:0.4
+FROM rubybench/ruby_releases_base:0.6
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
 RUN git clone --verbose --branch master --single-branch https://github.com/ruby-bench/ruby-bench-suite.git
