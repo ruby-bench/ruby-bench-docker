@@ -45,3 +45,14 @@ if [ "$OPTCARROT_BENCHMARK" = true ]; then
 else
   echo "Skipping optcarrot benchmarks"
 fi
+
+if [ "$LIQUID_BENCHMARK" = true ]; then
+  echo "Running liquid benchmarks with Ruby $RUBY_VERSION"
+  gem update bundler
+  gem install bundler --no-ri --no-rdoc
+  cd /ruby-bench-suite/liquid_benchmarks/liquid
+  bundle install --without test
+  bundle exec ruby /ruby-bench-suite/liquid_benchmarks/driver.rb
+else
+  echo "Skipping liquid benchmarks"
+fi
