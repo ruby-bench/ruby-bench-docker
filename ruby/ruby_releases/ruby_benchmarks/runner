@@ -48,7 +48,6 @@ fi
 
 if [ "$LIQUID_BENCHMARK" = true ]; then
   echo "Running liquid benchmarks with Ruby $RUBY_VERSION"
-  gem update bundler
   gem install bundler --no-ri --no-rdoc
   cd /ruby-bench-suite/liquid_benchmarks/liquid
   bundle install --without test
