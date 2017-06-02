@@ -12,7 +12,7 @@ echo "-------------- $(date)"
 RAILS_VERSION=$1
 API_NAME=$2
 API_PASSWORD=$3
-CUSTOM_ENV=$4
+PREPARED_STATEMENTS=$4
 PATTERNS=$5
 
 set -x
@@ -30,7 +30,7 @@ docker run --rm \
   -e "RAILS_VERSION=$RAILS_VERSION" \
   -e "API_NAME=$API_NAME" \
   -e "API_PASSWORD=$API_PASSWORD" \
-  $CUSTOM_ENV \
+  -e "MYSQL2_PREPARED_STATEMENTS=$PREPARED_STATEMENTS" \
   -e "INCLUDE_PATTERNS=$PATTERNS" \
   rubybench/rails_releases
 
