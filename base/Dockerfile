@@ -1,12 +1,12 @@
-# rubybench/ruby:0.3
-FROM ubuntu:14.04
+# rubybench/ruby:0.4
+FROM ubuntu:16.04
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
 ENV LANG en_US.UTF-8
 
 RUN apt-get update
+RUN apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev git curl libtool libxslt-dev libxml2-dev libpq-dev gawk curl pngcrush python-software-properties software-properties-common tasksel apache2-utils postgresql-client libffi-dev locales
 RUN locale-gen en_US.UTF-8
-RUN apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev git curl libtool libxslt-dev libxml2-dev libpq-dev gawk curl pngcrush python-software-properties software-properties-common tasksel apache2-utils postgresql-client libffi-dev
 RUN git config --global user.email "you@example.com" && \
     git config --global user.name "Your Name"
 
