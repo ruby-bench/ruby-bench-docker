@@ -1,14 +1,13 @@
+#!/bin/bash
+
 # Ruby Benchmarks
 
-## Ruby trunk
+# Ruby trunk
 
-#### Build base image for Ruby benchmarks
-```
+# Build base image for Ruby benchmarks
 sudo docker build --no-cache -t rubybench/ruby_trunk .
-```
 
-#### Run Ruby benchmarks
-```
+# Run Ruby benchmarks
 sudo docker run --rm \
   -e "RUBY_BENCHMARKS=true" \
   -e "RUBY_MEMORY_BENCHMARKS=true" \
@@ -17,19 +16,15 @@ sudo docker run --rm \
   -e "API_PASSWORD=<API PASSWORD>" \
   -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>"
   rubybench/ruby_trunk
-```
-## Ruby Releases
 
-### Ruby Benchmarks
+# Ruby Releases
 
-#### Build base image for Ruby benchmarks
-```
+# Build base image for Ruby benchmarks
 sudo docker build --no-cache -t rubybench/ruby_releases_base .
 sudo docker build --no-cache -t rubybench/ruby_releases .
-```
 
-#### Run Ruby benchmarks
-```
+
+# Run Ruby benchmarks
 sudo docker run --rm \
   -e "RUBY_BENCHMARKS=true" \
   -e "RUBY_MEMORY_BENCHMARKS=true" \
@@ -38,23 +33,17 @@ sudo docker run --rm \
   -e "API_PASSWORD=<API PASSWORD>" \
   -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>"
   rubybench/ruby_releases
-```
 
-### Discourse Benchmarks
+# Discourse Benchmarks
 
-#### Build base image for Discourse benchmarks
-```
+# Build base image for Discourse benchmarks
 sudo docker build --no-cache -t rubybench/ruby_releases_base .
 sudo docker build --no-cache -t rubybench/ruby_releases_discourse .
-```
 
-#### Setup containers for Redis server and PostgreSQL
-```
+# Setup containers for Redis server and PostgreSQL
 sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name discourse_postgres -d postgres:9.3.5
-```
 
-#### Run Discourse benchmarks
-```
+# Run Discourse benchmarks
 sudo docker run --rm \
   --link discourse_postgres:postgres \
   --link discourse_redis:redis \
@@ -62,25 +51,17 @@ sudo docker run --rm \
   -e "API_NAME=<API NAME>" \
   -e "API_PASSWORD=<API PASSWORD>"
   rubybench/ruby_releases_discourse
-```
 
 # Discourse Benchmarks
 
-## Benchmarking Discourse against Ruby trunk
-
-#### Build base image for Discourse
-```
+# Build base image for Discourse
 cd ruby/ruby_trunk/discourse_benchmarks
 sudo docker build --no-cache -t rubybench/ruby_trunk_discourse .
-```
 
-#### Setup containers for Redis server and PostgreSQL
-```
+# Setup containers for Redis server and PostgreSQL
 sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name discourse_postgres -d postgres:9.3.5
-```
 
-#### Run benchmarks
-```
+# Run benchmarks
 sudo docker run --rm \
   --link discourse_postgres:postgres \
   --link discourse_redis:redis \
@@ -88,27 +69,20 @@ sudo docker run --rm \
   -e "API_NAME=<API NAME>" \
   -e "API_PASSWORD=<API PASSWORD>" \
   rubybench/ruby_trunk_discourse
-```
 
 # Rails Benchmarks
 
-## Rails Releases
-
-#### Build base image
-```
+# Rails Releases
+# Build base image
 cd rails/rails_releases/rails_benchmarks
 sudo docker build --no-cache -t rubybench/rails_releases .
-```
 
-#### Setup containers for PostgreSQL and MySQL
-```
+# Setup containers for PostgreSQL and MySQL
 sudo docker run --name postgres -d postgres:9.3.5 && \
 sudo docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" -d mysql:5.6.24 && \
 sudo docker run --name redis -d redis:2.8.19
-```
 
-#### Run benchmarks
-```
+# Run benchmarks
 sudo docker run --rm \
   --link postgres:postgres \
   --link mysql:mysql \
@@ -118,25 +92,18 @@ sudo docker run --rm \
   -e "API_PASSWORD=<API PASSWORD>" \
   -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>" \
   rubybench/rails_releases
-```
 
-## Rails Trunk
-
-#### Build base image
-```
+# Rails Trunk
+# Build base image
 cd rails/rails_trunk/rails_benchmarks
 sudo docker build --no-cache -t rubybench/rails_trunk .
-```
 
-#### Setup containers for PostgreSQL and MySQL
-```
+# Setup containers for PostgreSQL and MySQL
 sudo docker run --name postgres -d postgres:9.3.5 && \
 sudo docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" -d mysql:5.6.24 && \
 sudo docker run --name redis -d redis:2.8.19
-```
 
-#### Run benchmarks
-```
+# Run benchmarks
 sudo docker run --rm \
   --link postgres:postgres \
   --link mysql:mysql \
@@ -146,27 +113,20 @@ sudo docker run --rm \
   -e "API_PASSWORD=<API PASSWORD>" \
   -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>" \
   rubybench/rails_trunk
-```
 
 # Sequel Benchmarks
 
-## Sequel Releases
-
-#### Build base image
-```
+# Sequel Releases
+# Build base image
 cd sequel/sequel_releases/sequel_benchmarks
 sudo docker build --no-cache -t rubybench/sequel_releases .
-```
 
-#### Setup containers for PostgreSQL and MySQL
-```
+# Setup containers for PostgreSQL and MySQL
 sudo docker run --name postgres -d postgres:9.3.5 && \
 sudo docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" -d mysql:5.6.24 && \
 sudo docker run --name redis -d redis:2.8.19
-```
 
-#### Run benchmarks
-```
+# Run benchmarks
 sudo docker run --rm \
   --link postgres:postgres \
   --link mysql:mysql \
@@ -176,25 +136,18 @@ sudo docker run --rm \
   -e "API_PASSWORD=<API PASSWORD>" \
   -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>" \
   rubybench/sequel_releases
-```
 
-## Sequel Trunk
-
-#### Build base image
-```
+# Sequel Trunk
+# Build base image
 cd sequel/sequel_trunk/sequel_benchmarks
 sudo docker build --no-cache -t rubybench/sequel_trunk .
-```
 
-#### Setup containers for PostgreSQL and MySQL
-```
+# Setup containers for PostgreSQL and MySQL
 sudo docker run --name postgres -d postgres:9.3.5 && \
 sudo docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" -d mysql:5.6.24 && \
 sudo docker run --name redis -d redis:2.8.19
-```
 
-#### Run benchmarks
-```
+# Run benchmarks
 sudo docker run --rm \
   --link postgres:postgres \
   --link mysql:mysql \
@@ -204,4 +157,3 @@ sudo docker run --rm \
   -e "API_PASSWORD=<API PASSWORD>" \
   -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>" \
   rubybench/sequel_trunk
-```
