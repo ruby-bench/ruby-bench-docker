@@ -147,3 +147,27 @@ sudo docker run --rm \
   -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>" \
   rubybench/rails_trunk
 ```
+
+## Benchmarking Rails
+
+#### Build base image for Discourse
+```bash
+cd rails/rails_benchmarks
+sudo docker build --no-cache -t kirs/rails_bench .
+```
+
+#### Setup containers for Redis server and PostgreSQL
+```bash
+sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name discourse_postgres -d postgres:9.3.5
+```
+
+#### Run benchmarks
+```bash
+sudo docker run --rm \
+  --link discourse_postgres:postgres \
+  --link discourse_redis:redis \
+  -e "RAILS_COMMIT_HASH=<rails commit sha1>" \
+  -e "API_NAME=<API NAME>" \
+  -e "API_PASSWORD=<API PASSWORD>" \
+  kirs/rails_bench
+```
