@@ -1,4 +1,4 @@
-FROM rubybench/ruby:0.3
+FROM rubybench/ruby:0.4
 MAINTAINER Alan Guo Xiang Tan "https://twitter.com/tgx_world"
 
 ADD runner runner
