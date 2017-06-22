@@ -1,4 +1,4 @@
-FROM rubybench/ruby:0.4
+FROM rubybench/ruby:0.5
 MAINTAINER Alan Guo Xiang Tan "https://twitter.com/tgx_world"
 
 RUN apt-get update
