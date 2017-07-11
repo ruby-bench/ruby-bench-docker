@@ -41,6 +41,9 @@ cd /ruby-bench-suite/sequel
 sed -i "s/gem 'sequel', github: 'jeremyevans\/sequel', branch: 'master'/gem 'sequel', path: '\/sequel'/g" Gemfile
 bundle install -j4
 
+cd /ruby-bench-suite/support/setup
+bundle install
+
 echo "Running benchmarks with Sequel $SEQUEL_COMMIT_HASH"
 cd /ruby-bench-suite/sequel/benchmarks
 ruby driver.rb $PATTERNS
