@@ -31,6 +31,9 @@ gem update bundler
 gem install bundler --no-ri --no-rdoc
 bundle install -j4
 
+cd /ruby-bench-suite/support/setup
+bundle install
+
 echo "Running benchmarks with Rails $RAILS_VERSION"
 cd /ruby-bench-suite/rails/benchmarks
 ruby driver.rb -r 2 $PATTERNS
