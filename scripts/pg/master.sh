@@ -13,7 +13,7 @@ set -x
 
 docker pull rubybench/pg_master
 
-docker run --name postgres -d postgres:9.3.5
+docker run --name postgres -d postgres:9.6
 
 docker run --rm \
   --link postgres:postgres \
