@@ -17,5 +17,3 @@ echo "Running benchmarks for latest ruby-pg commit"
 PG_MASTER=1 bundle install
 cd /ruby-bench-suite/pg/benchmarks
 PG_MASTER=1 ruby driver.rb --pattern $INCLUDE_PATTERNS
-
-
