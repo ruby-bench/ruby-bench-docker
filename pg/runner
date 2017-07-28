@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+
+while ! exec 6<>/dev/tcp/${POSTGRES_PORT_5432_TCP_ADDR}/${POSTGRES_PORT_5432_TCP_PORT}; do
+  echo "$(date) - still trying to connect to Postgres server"
+  sleep 1
+done
+
+dropdb --if-exists -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres rubybench
+createdb -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres rubybench
+
+echo "Running benchmarks using latest suite version"
+cd /ruby-bench-suite/pg
+git pull --rebase origin master
+
+echo "Running benchmarks for latest ruby-pg commit"
+PG_MASTER=1 bundle install
+cd /ruby-bench-suite/pg/benchmarks
+PG_MASTER=1 ruby driver.rb --pattern $INCLUDE_PATTERNS
