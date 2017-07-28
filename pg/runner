@@ -16,4 +16,8 @@ git pull --rebase origin master
 echo "Running benchmarks for latest ruby-pg commit"
 PG_MASTER=1 bundle install
 cd /ruby-bench-suite/pg/benchmarks
-PG_MASTER=1 ruby driver.rb --pattern $INCLUDE_PATTERNS
+
+if [ "$INCLUDE_PATTERNS" ]; then
+  PATTERNS="--pattern $INCLUDE_PATTERNS"
+fi
+PG_MASTER=1 ruby driver.rb $PATTERNS
