@@ -18,7 +18,7 @@ echo "Running benchmarks for latest ruby-pg commit"
 PG_MASTER=1 bundle install
 
 cd /ruby-bench-suite/support/setup
-bundle install
+bundle install --without mysql
 
 if [ "$INCLUDE_PATTERNS" ]; then
   PATTERNS="--pattern $INCLUDE_PATTERNS"
