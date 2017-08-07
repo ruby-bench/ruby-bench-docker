@@ -13,6 +13,9 @@ echo "Running benchmarks using latest suite version"
 cd /ruby-bench-suite/pg
 git pull --rebase origin master
 
+cd /ruby-bench-suite/support/setup
+bundle install
+
 echo "Running benchmarks for latest ruby-pg commit"
 PG_MASTER=1 bundle install
 cd /ruby-bench-suite/pg/benchmarks
