@@ -9,18 +9,20 @@ done
 dropdb --if-exists -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres rubybench
 createdb -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres rubybench
 
-echo "Running benchmarks using latest suite version"
 cd /ruby-bench-suite/pg
+
+echo "Running benchmarks using latest suite version"
 git pull --rebase origin master
+
+echo "Running benchmarks for latest ruby-pg commit"
+PG_MASTER=1 bundle install
 
 cd /ruby-bench-suite/support/setup
 bundle install
 
-echo "Running benchmarks for latest ruby-pg commit"
-PG_MASTER=1 bundle install
-cd /ruby-bench-suite/pg/benchmarks
-
 if [ "$INCLUDE_PATTERNS" ]; then
   PATTERNS="--pattern $INCLUDE_PATTERNS"
 fi
+
+cd /ruby-bench-suite/pg/benchmarks
 PG_MASTER=1 ruby driver.rb $PATTERNS
