@@ -14,7 +14,7 @@ set -x
 
 docker pull rubybench/sequel_trunk
 
-docker run --name postgres -d postgres:9.3.5
+docker run --name postgres -d postgres:9.6 -c shared_buffers=500MB -c fsync=off -c full_page_writes=off
 docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" -d mysql:5.6.24
 docker run --name redis -d redis:2.8.19
 

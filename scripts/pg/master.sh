@@ -13,7 +13,7 @@ set -x
 
 docker pull rubybench/pg_master
 
-docker run --name postgres -d postgres:9.6
+docker run --name postgres -d postgres:9.6 -c shared_buffers=500MB -c fsync=off -c full_page_writes=off
 
 docker run --rm \
   --link postgres:postgres \
