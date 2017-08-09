@@ -15,5 +15,3 @@ RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc && cd /rails && bundl
 
 ADD runner runner
 RUN chmod 755 runner
-
-CMD /bin/bash -l -c "./runner"
