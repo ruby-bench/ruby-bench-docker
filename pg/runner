@@ -1,13 +1,12 @@
 #!/bin/bash
 set -e
 
-while ! exec 6<>/dev/tcp/${POSTGRES_PORT_5432_TCP_ADDR}/${POSTGRES_PORT_5432_TCP_PORT}; do
-  echo "$(date) - still trying to connect to Postgres server"
+until pg_isready -h postgres; do
   sleep 1
 done
 
-dropdb --if-exists -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres rubybench
-createdb -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres rubybench
+dropdb --if-exists -h postgres -U postgres rubybench
+createdb -h postgres -U postgres rubybench
 
 cd /ruby-bench-suite/pg
 

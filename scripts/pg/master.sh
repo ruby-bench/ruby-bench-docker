@@ -3,7 +3,11 @@
 mkdir -p $HOME/logs/pg/master
 exec &>> $HOME/logs/pg/master/run.log
 
-echo "-----------$(date)"
+echo
+echo
+echo
+echo
+echo "-------------$(date)"
 
 API_NAME=$1
 API_PASSWORD=$2
@@ -11,16 +15,13 @@ PATTERNS=$3
 
 set -x
 
-docker pull rubybench/pg_master
+cd $HOME/ruby-bench-docker/rails/master
 
-docker run --name postgres -d postgres:9.6 -c shared_buffers=500MB -c fsync=off -c full_page_writes=off
-
-docker run --rm \
-  --link postgres:postgres \
+docker-compose run \
   -e "API_NAME=$API_NAME" \
   -e "API_PASSWORD=$API_PASSWORD" \
   -e "INCLUDE_PATTERNS=$PATTERNS" \
-  rubybench/pg_master
+  pg_master \
+  /bin/bash -l -c "./runner"
 
-docker stop postgres
-docker rm -v postgres
+docker-compose down
