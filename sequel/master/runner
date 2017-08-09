@@ -1,6 +1,15 @@
 #!/bin/bash
 set -e
 
+until pg_isready -h postgres; do
+   sleep 1
+done
+
+while ! mysqladmin ping -h mysql --silent; do
+  echo "mysql - no response"
+  sleep 1
+done
+
 dropdb --if-exists -h postgres -U postgres rubybench
 createdb -h postgres -U postgres rubybench
 echo "DROP DATABASE IF EXISTS rubybench" | mysql -u root -h mysql
