@@ -1,20 +1,19 @@
 #!/bin/bash
 set -e
 
-while ! exec 6<>/dev/tcp/${POSTGRES_PORT_5432_TCP_ADDR}/${POSTGRES_PORT_5432_TCP_PORT}; do
-  echo "$(date) - still trying to connect to Postgres server"
+until pg_isready -h postgres; do
+   sleep 1
+done
+
+while ! mysqladmin ping -h mysql --silent; do
+  echo "mysql - no response"
   sleep 1
 done
 
-while ! exec 6<>/dev/tcp/${MYSQL_PORT_3306_TCP_ADDR}/${MYSQL_PORT_3306_TCP_PORT}; do
-  echo "$(date) - still trying to connect to Mysql server"
-  sleep 1
-done
-
-dropdb --if-exists -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres rubybench
-createdb -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres rubybench
-echo "DROP DATABASE IF EXISTS rubybench" | mysql -u root -h "$MYSQL_PORT_3306_TCP_ADDR" -P "MYSQL_PORT_3306_TCP_PORT"
-echo "CREATE DATABASE rubybench" | mysql -u root -h "$MYSQL_PORT_3306_TCP_ADDR" -P "MYSQL_PORT_3306_TCP_PORT"
+dropdb --if-exists -h postgres -U postgres rubybench
+createdb -h postgres -U postgres rubybench
+echo "DROP DATABASE IF EXISTS rubybench" | mysql -u root -h mysql
+echo "CREATE DATABASE rubybench" | mysql -u root -h mysql
 
 echo "gem: --no-ri --no-rdoc" > ~/.gemrc
 gem update bundler

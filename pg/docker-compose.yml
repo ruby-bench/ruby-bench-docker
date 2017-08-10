@@ -1,0 +1,9 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:9.6
+
+  pg_master:
+    build: .
+    depends_on:
+      - postgres
