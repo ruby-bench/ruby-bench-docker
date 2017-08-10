@@ -9,7 +9,7 @@ echo
 echo
 echo -------------$(date)
 
-SEQUEL_COMMIT_HASH=$1
+COMMIT_HASH=$1
 API_NAME=$2
 API_PASSWORD=$3
 PATTERNS=$4
