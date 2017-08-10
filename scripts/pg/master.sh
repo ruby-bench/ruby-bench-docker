@@ -15,7 +15,7 @@ PATTERNS=$3
 
 set -x
 
-cd $HOME/ruby-bench-docker/rails/master
+cd $HOME/ruby-bench-docker/pg
 
 docker-compose run \
   -e "API_NAME=$API_NAME" \
