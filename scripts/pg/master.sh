@@ -9,15 +9,17 @@ echo
 echo
 echo "-------------$(date)"
 
-API_NAME=$1
-API_PASSWORD=$2
-PATTERNS=$3
+COMMIT_HASH=$1
+API_NAME=$2
+API_PASSWORD=$3
+PATTERNS=$4
 
 set -x
 
 cd $HOME/ruby-bench-docker/pg
 
 docker-compose run \
+  -e "PG_COMMIT_HASH=$COMMIT_HASH" \
   -e "API_NAME=$API_NAME" \
   -e "API_PASSWORD=$API_PASSWORD" \
   -e "INCLUDE_PATTERNS=$PATTERNS" \
