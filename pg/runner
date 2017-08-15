@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 
 until pg_isready -h postgres; do
   sleep 1
@@ -8,14 +8,21 @@ done
 dropdb --if-exists -h postgres -U postgres rubybench
 createdb -h postgres -U postgres rubybench
 
-cd /ruby-bench-suite/pg
+# Setting up ruby-pg"
+cd /ruby-pg
+git pull --rebase origin master
+if [ -n "$PG_COMMIT_HASH" ]; then git reset --hard $PG_COMMIT_HASH; fi
+bundle install
 
-echo "Running benchmarks using latest suite version"
+# Setting up ruby-bench-suite"
+cd /ruby-bench-suite
 git pull --rebase origin master
 
-echo "Running benchmarks for latest ruby-pg commit"
-PG_MASTER=1 bundle install
+# Installing pg suite bundle"
+cd /ruby-bench-suite/pg
+bundle install
 
+# Installing before setup bundle"
 cd /ruby-bench-suite/support/setup
 bundle install --without mysql
 
@@ -24,4 +31,4 @@ if [ "$INCLUDE_PATTERNS" ]; then
 fi
 
 cd /ruby-bench-suite/pg/benchmarks
-PG_MASTER=1 ruby driver.rb $PATTERNS
+ruby driver.rb $PATTERNS
