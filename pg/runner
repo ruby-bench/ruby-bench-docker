@@ -13,6 +13,7 @@ cd /ruby-pg
 git pull --rebase origin master
 if [ -n "$PG_COMMIT_HASH" ]; then git reset --hard $PG_COMMIT_HASH; fi
 bundle install
+bundle exec rake compile
 
 # Setting up ruby-bench-suite"
 cd /ruby-bench-suite
