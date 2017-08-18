@@ -8,10 +8,19 @@ done
 dropdb --if-exists -h postgres -U postgres rubybench
 createdb -h postgres -U postgres rubybench
 
+DISABLE_CHANGELOG_TASK_COMMIT=9cf94b2f42e879a06124f33ee3325d82f381bde7
+
 # Setting up ruby-pg"
 cd /ruby-pg
 git pull --rebase origin master
 if [ -n "$PG_COMMIT_HASH" ]; then git reset --hard $PG_COMMIT_HASH; fi
+
+# Disable changelog task which breaks compile task
+if [[ $(git rev-list --count $PG_COMMIT_HASH..$DISABLE_CHANGELOG_TASK_COMMIT) -gt 0 ]]; then
+  sed -i '/file .ChangeLog./i \
+    Rake::Task["ChangeLog"].clear' Rakefile
+fi
+
 bundle install
 bundle exec rake compile
 
