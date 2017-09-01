@@ -27,4 +27,4 @@ docker-compose run \
   rails_master \
   /bin/bash -l -c "./runner"
 
-docker-compose down
+docker-compose down -v

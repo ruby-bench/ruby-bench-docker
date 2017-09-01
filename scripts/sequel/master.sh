@@ -27,4 +27,4 @@ docker-compose run \
   sequel_master \
   /bin/bash -l -c "./runner"
 
-docker-compose down
+docker-compose down -v
