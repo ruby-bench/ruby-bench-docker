@@ -1,0 +1,14 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - sudo apt-get install -y curl
+  - sudo apt-get install -y jq
+
+script:
+  - sed -i "s_FROM.*_FROM rubybench/ruby_trunk:$(curl -s -S "https://registry.hub.docker.com/v2/repositories/rubybench/ruby_trunk/tags/" | jq '."results"[]["name"]'| sed -n 1p |cut -c2-8)_" ./Dockerfile
+  - docker tag $(docker build . | tail -n 1 | cut -d' ' -f 3) $rubybench/ruby_trunk:$(git ls-remote https://github.com/tgxworld/ruby trunk | cut -c1-7)
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push rubybench/ruby_trunk
