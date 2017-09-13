@@ -36,4 +36,4 @@ bundle install
 
 echo "Running benchmarks with Rails $RAILS_VERSION"
 cd /ruby-bench-suite/rails/benchmarks
-ruby driver.rb -r 2 $PATTERNS
+ruby driver.rb -r 1 $PATTERNS

@@ -33,7 +33,7 @@ fi
 if [ "$RUBY_BENCHMARKS" = true ]; then
   ruby /ruby-bench-suite/ruby/benchmarks/driver.rb \
     --executables ruby \
-    --repeat-count 2 \
+    --repeat-count 1 \
     $PATTERNS
 else
   echo "Skipping Ruby benchmarks"
@@ -42,7 +42,7 @@ fi
 if [ "$RUBY_MEMORY_BENCHMARKS" = true ]; then
   ruby /ruby-bench-suite/ruby/benchmarks/memory_driver.rb \
     --executables ruby \
-    --repeat-count 2 \
+    --repeat-count 1 \
     $PATTERNS
 else
   echo "Skipping Ruby memory benchmarks"
