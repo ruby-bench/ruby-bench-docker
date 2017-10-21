@@ -1,4 +1,8 @@
-# Ruby Benchmarks
+# Docker images for RubyBench suites
+
+<div align="center">
+  <img src="ruby-bench-docker-logo.png" width="200">
+</div>
 
 ## Ruby trunk
 
@@ -10,13 +14,13 @@ sudo docker build --no-cache -t rubybench/ruby_trunk .
 #### Run Ruby benchmarks
 ```
 sudo docker run --rm \
-  -e "RUBY_BENCHMARKS=true" \
-  -e "RUBY_MEMORY_BENCHMARKS=true" \
-  -e "RUBY_COMMIT_HASH=<commit sha1>" \
-  -e "API_NAME=<API NAME>" \
-  -e "API_PASSWORD=<API PASSWORD>" \
-  -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>"
-  rubybench/ruby_trunk
+-e "RUBY_BENCHMARKS=true" \
+-e "RUBY_MEMORY_BENCHMARKS=true" \
+-e "RUBY_COMMIT_HASH=<commit sha1>" \
+-e "API_NAME=<API NAME>" \
+-e "API_PASSWORD=<API PASSWORD>" \
+-e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>"
+rubybench/ruby_trunk
 ```
 ## Ruby Releases
 
@@ -31,13 +35,13 @@ sudo docker build --no-cache -t rubybench/ruby_releases .
 #### Run Ruby benchmarks
 ```
 sudo docker run --rm \
-  -e "RUBY_BENCHMARKS=true" \
-  -e "RUBY_MEMORY_BENCHMARKS=true" \
-  -e "RUBY_VERSION=<ruby version>" \
-  -e "API_NAME=<API NAME>" \
-  -e "API_PASSWORD=<API PASSWORD>" \
-  -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>"
-  rubybench/ruby_releases
+-e "RUBY_BENCHMARKS=true" \
+-e "RUBY_MEMORY_BENCHMARKS=true" \
+-e "RUBY_VERSION=<ruby version>" \
+-e "API_NAME=<API NAME>" \
+-e "API_PASSWORD=<API PASSWORD>" \
+-e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>"
+rubybench/ruby_releases
 ```
 
 ### Discourse Benchmarks
@@ -56,12 +60,12 @@ sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name
 #### Run Discourse benchmarks
 ```
 sudo docker run --rm \
-  --link discourse_postgres:postgres \
-  --link discourse_redis:redis \
-  -e "RUBY_VERSION=<ruby version>" \
-  -e "API_NAME=<API NAME>" \
-  -e "API_PASSWORD=<API PASSWORD>"
-  rubybench/ruby_releases_discourse
+--link discourse_postgres:postgres \
+--link discourse_redis:redis \
+-e "RUBY_VERSION=<ruby version>" \
+-e "API_NAME=<API NAME>" \
+-e "API_PASSWORD=<API PASSWORD>"
+rubybench/ruby_releases_discourse
 ```
 
 # Discourse Benchmarks
@@ -82,12 +86,12 @@ sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name
 #### Run benchmarks
 ```
 sudo docker run --rm \
-  --link discourse_postgres:postgres \
-  --link discourse_redis:redis \
-  -e "RUBY_COMMIT_HASH=<ruby commit sha1>" \
-  -e "API_NAME=<API NAME>" \
-  -e "API_PASSWORD=<API PASSWORD>" \
-  rubybench/ruby_trunk_discourse
+--link discourse_postgres:postgres \
+--link discourse_redis:redis \
+-e "RUBY_COMMIT_HASH=<ruby commit sha1>" \
+-e "API_NAME=<API NAME>" \
+-e "API_PASSWORD=<API PASSWORD>" \
+rubybench/ruby_trunk_discourse
 ```
 
 # Rails Benchmarks
@@ -110,14 +114,14 @@ sudo docker run --name redis -d redis:2.8.19
 #### Run benchmarks
 ```
 sudo docker run --rm \
-  --link postgres:postgres \
-  --link mysql:mysql \
-  --link redis:redis \
-  -e "RAILS_VERSION=<Rails version>" \
-  -e "API_NAME=<API NAME>" \
-  -e "API_PASSWORD=<API PASSWORD>" \
-  -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>" \
-  rubybench/rails_releases
+--link postgres:postgres \
+--link mysql:mysql \
+--link redis:redis \
+-e "RAILS_VERSION=<Rails version>" \
+-e "API_NAME=<API NAME>" \
+-e "API_PASSWORD=<API PASSWORD>" \
+-e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>" \
+rubybench/rails_releases
 ```
 
 ## Rails Trunk
@@ -138,12 +142,12 @@ sudo docker run --name redis -d redis:2.8.19
 #### Run benchmarks
 ```
 sudo docker run --rm \
-  --link postgres:postgres \
-  --link mysql:mysql \
-  --link redis:redis \
-  -e "RAILS_COMMIT_HASH=<commit sha1>" \
-  -e "API_NAME=<API NAME>" \
-  -e "API_PASSWORD=<API PASSWORD>" \
-  -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>" \
-  rubybench/rails_trunk
+--link postgres:postgres \
+--link mysql:mysql \
+--link redis:redis \
+-e "RAILS_COMMIT_HASH=<commit sha1>" \
+-e "API_NAME=<API NAME>" \
+-e "API_PASSWORD=<API PASSWORD>" \
+-e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>" \
+rubybench/rails_trunk
 ```
