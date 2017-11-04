@@ -1,12 +1,15 @@
 
 # Docker images for RubyBench suite
 
-<img align="right" src="ruby-bench-docker-logo.png" width="200">
+
+<img align="left" src="ruby-bench-docker-logo.png" width="200">
+
+<br><br><br>
 
 We run all benchmarks in Docker containers to take advantage of isolated run environment, which provides us with consistent results.
 Each run boots new fresh container which is removed once the run has finished.
 
-<br>
+<br><br>
 
 ## Maintained Docker images
 
