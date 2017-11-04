@@ -1,17 +1,28 @@
-<img align="right" src="ruby-bench-docker-logo.png" width="200">
 
 # Docker images for RubyBench suite
 
+<img align="right" src="ruby-bench-docker-logo.png" width="200">
+
 We run all benchmarks in Docker containers to take advantage of isolated run environment, which provides us with consistent results.
-Each run boots new fresh container and which is removed once the run has finished.
+Each run boots new fresh container which is removed once the run has finished.
+
+<br>
 
 ## Maintained Docker images
+
+- [rubybench/ruby_trunk](#rubybenchruby_trunk)
+- [rubybench/ruby_releases](#rubybenchruby_releases)
+- [rubybench/ruby_trunk_discourse](#rubybenchruby_trunk_discourse)
+- [rubybench/ruby_releases_discourse](#rubybenchruby_releases_discourse)
+- [rubybench/rails_trunk](#rubybenchrails_trunk)
+- [rubybench/rails_releases](#rubybenchrails_releases)
+
 You can pull each image from [Dockerhub](https://hub.docker.com/u/rubybench/) with:
 ```
 docker pull <image>
 ```
 
-#### rubybench/ruby_trunk
+#### [rubybench/ruby_trunk](ruby/ruby_trunk/ruby_benchmarks/Dockerfile)
 
 Intended to run Ruby benchmarks on a per-commit basis:
 
@@ -26,7 +37,7 @@ docker run --rm \
   rubybench/ruby_trunk
 ```
 
-#### rubybench/ruby_releases
+#### [rubybench/ruby_releases](ruby/ruby_releases/ruby_benchmarks/Dockerfile)
 
 Intended to run Ruby benchmarks on a per-release basis:
 
@@ -41,7 +52,7 @@ docker run --rm \
   rubybench/ruby_releases
 ```
 
-#### rubybench/ruby_trunk_discourse
+#### [rubybench/ruby_trunk_discourse](ruby/ruby_trunk/discourse_benchmarks/Dockerfile)
 ###### TODO: run with docker-compose
 
 Intended to run Discourse benchmarks for each Ruby commit:
@@ -59,7 +70,7 @@ docker run --rm \
   rubybench/ruby_trunk_discourse
 ```
 
-#### rubybench/ruby_releases_discourse
+#### [rubybench/ruby_releases_discourse](ruby/ruby_releases/discourse_benchmarks/Dockerfile)
 ###### TODO: run with docker-compose
 
 Intended to run Discourse benchmarks for each Ruby release:
@@ -81,7 +92,7 @@ docker run --rm \
   rubybench/ruby_releases_discourse
 ```
 
-#### rubybench/rails_trunk
+#### [rubybench/rails_trunk](rails/master/Dockerfile)
 
 Intended to run Rails benchmarks on a per-commit basis:
 
@@ -96,7 +107,7 @@ docker-compose run \
   /bin/bash -l -c "./runner"
 ```
 
-#### rubybench/rails_release
+#### [rubybench/rails_releases](rails/release/Dockerfile)
 ###### TODO: run with docker-compose
 
 Intended to run Rails benchmarks on a per-release basis:
