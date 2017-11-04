@@ -1,6 +1,4 @@
-<div align="center">
-  <img src="ruby-bench-docker-logo.png" width="200">
-</div>
+<img align="right" src="ruby-bench-docker-logo.png" width="200">
 
 # Docker images for RubyBench suite
 
@@ -27,7 +25,6 @@ docker run --rm \
   -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>"
   rubybench/ruby_trunk
 ```
-## Ruby Releases
 
 #### rubybench/ruby_releases
 
@@ -50,8 +47,6 @@ docker run --rm \
 Intended to run Discourse benchmarks for each Ruby commit:
 
 ```
-# Run redis and postgres in separate containers
-
 docker run --name discourse_redis -d redis:2.8.19
 docker run --name discourse_postgres -d postgres:9.3.5
 
@@ -73,8 +68,6 @@ Intended to run Discourse benchmarks for each Ruby release:
 sudo docker run --name postgres -d postgres:9.3.5 && \
 sudo docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" -d mysql:5.6.24 && \
 sudo docker run --name redis -d redis:2.8.19
-```
-# Run redis and postgres in separate containers
 
 docker run --name discourse_redis -d redis:2.8.19
 docker run --name discourse_postgres -d postgres:9.3.5
@@ -109,7 +102,6 @@ docker-compose run \
 Intended to run Rails benchmarks on a per-release basis:
 
 ```
-# Run postgres, mysql and redis containers
 sudo docker run --name postgres -d postgres:9.3.5
 sudo docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" -d mysql:5.6.24
 sudo docker run --name redis -d redis:2.8.19
