@@ -1,153 +1,126 @@
-# Docker images for RubyBench suites
-
 <div align="center">
   <img src="ruby-bench-docker-logo.png" width="200">
 </div>
 
-## Ruby trunk
+# Docker images for RubyBench suite
 
-#### Build base image for Ruby benchmarks
+We run all benchmarks in Docker containers to take advantage of isolated run environment, which provides us with consistent results.
+Each run boots new fresh container and which is removed once the run has finished.
+
+## Maintained Docker images
+You can pull each image from [Dockerhub](https://hub.docker.com/u/rubybench/) with:
 ```
-sudo docker build --no-cache -t rubybench/ruby_trunk .
+docker pull <image>
 ```
 
-#### Run Ruby benchmarks
+#### rubybench/ruby_trunk
+
+Intended to run Ruby benchmarks on a per-commit basis:
+
 ```
-sudo docker run --rm \
--e "RUBY_BENCHMARKS=true" \
--e "RUBY_MEMORY_BENCHMARKS=true" \
--e "RUBY_COMMIT_HASH=<commit sha1>" \
--e "API_NAME=<API NAME>" \
--e "API_PASSWORD=<API PASSWORD>" \
--e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>"
-rubybench/ruby_trunk
+docker run --rm \
+  -e "RUBY_BENCHMARKS=true" \
+  -e "RUBY_MEMORY_BENCHMARKS=true" \
+  -e "RUBY_COMMIT_HASH=<commit sha1>" \
+  -e "API_NAME=<API NAME>" \
+  -e "API_PASSWORD=<API PASSWORD>" \
+  -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>"
+  rubybench/ruby_trunk
 ```
 ## Ruby Releases
 
-### Ruby Benchmarks
+#### rubybench/ruby_releases
 
-#### Build base image for Ruby benchmarks
-```
-sudo docker build --no-cache -t rubybench/ruby_releases_base .
-sudo docker build --no-cache -t rubybench/ruby_releases .
-```
+Intended to run Ruby benchmarks on a per-release basis:
 
-#### Run Ruby benchmarks
 ```
-sudo docker run --rm \
--e "RUBY_BENCHMARKS=true" \
--e "RUBY_MEMORY_BENCHMARKS=true" \
--e "RUBY_VERSION=<ruby version>" \
--e "API_NAME=<API NAME>" \
--e "API_PASSWORD=<API PASSWORD>" \
--e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>"
-rubybench/ruby_releases
+docker run --rm \
+  -e "RUBY_BENCHMARKS=true" \
+  -e "RUBY_MEMORY_BENCHMARKS=true" \
+  -e "RUBY_VERSION=<ruby version>" \
+  -e "API_NAME=<API NAME>" \
+  -e "API_PASSWORD=<API PASSWORD>" \
+  -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>"
+  rubybench/ruby_releases
 ```
 
-### Discourse Benchmarks
+#### rubybench/ruby_trunk_discourse
+###### TODO: run with docker-compose
 
-#### Build base image for Discourse benchmarks
-```
-sudo docker build --no-cache -t rubybench/ruby_releases_base .
-sudo docker build --no-cache -t rubybench/ruby_releases_discourse .
-```
+Intended to run Discourse benchmarks for each Ruby commit:
 
-#### Setup containers for Redis server and PostgreSQL
 ```
-sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name discourse_postgres -d postgres:9.3.5
-```
+# Run redis and postgres in separate containers
 
-#### Run Discourse benchmarks
-```
-sudo docker run --rm \
---link discourse_postgres:postgres \
---link discourse_redis:redis \
--e "RUBY_VERSION=<ruby version>" \
--e "API_NAME=<API NAME>" \
--e "API_PASSWORD=<API PASSWORD>"
-rubybench/ruby_releases_discourse
+docker run --name discourse_redis -d redis:2.8.19
+docker run --name discourse_postgres -d postgres:9.3.5
+
+docker run --rm \
+  --link discourse_postgres:postgres \
+  --link discourse_redis:redis \
+  -e "RUBY_COMMIT_HASH=<ruby commit sha1>" \
+  -e "API_NAME=<API NAME>" \
+  -e "API_PASSWORD=<API PASSWORD>" \
+  rubybench/ruby_trunk_discourse
 ```
 
-# Discourse Benchmarks
+#### rubybench/ruby_releases_discourse
+###### TODO: run with docker-compose
 
-## Benchmarking Discourse against Ruby trunk
+Intended to run Discourse benchmarks for each Ruby release:
 
-#### Build base image for Discourse
-```
-cd ruby/ruby_trunk/discourse_benchmarks
-sudo docker build --no-cache -t rubybench/ruby_trunk_discourse .
-```
-
-#### Setup containers for Redis server and PostgreSQL
-```
-sudo docker run --name discourse_redis -d redis:2.8.19 && sudo docker run --name discourse_postgres -d postgres:9.3.5
-```
-
-#### Run benchmarks
-```
-sudo docker run --rm \
---link discourse_postgres:postgres \
---link discourse_redis:redis \
--e "RUBY_COMMIT_HASH=<ruby commit sha1>" \
--e "API_NAME=<API NAME>" \
--e "API_PASSWORD=<API PASSWORD>" \
-rubybench/ruby_trunk_discourse
-```
-
-# Rails Benchmarks
-
-## Rails Releases
-
-#### Build base image
-```
-cd rails/rails_releases/rails_benchmarks
-sudo docker build --no-cache -t rubybench/rails_releases .
-```
-
-#### Setup containers for PostgreSQL and MySQL
 ```
 sudo docker run --name postgres -d postgres:9.3.5 && \
 sudo docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" -d mysql:5.6.24 && \
 sudo docker run --name redis -d redis:2.8.19
 ```
+# Run redis and postgres in separate containers
 
-#### Run benchmarks
-```
-sudo docker run --rm \
---link postgres:postgres \
---link mysql:mysql \
---link redis:redis \
--e "RAILS_VERSION=<Rails version>" \
--e "API_NAME=<API NAME>" \
--e "API_PASSWORD=<API PASSWORD>" \
--e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>" \
-rubybench/rails_releases
-```
+docker run --name discourse_redis -d redis:2.8.19
+docker run --name discourse_postgres -d postgres:9.3.5
 
-## Rails Trunk
-
-#### Build base image
-```
-cd rails/rails_trunk/rails_benchmarks
-sudo docker build --no-cache -t rubybench/rails_trunk .
+docker run --rm \
+  --link discourse_postgres:postgres \
+  --link discourse_redis:redis \
+  -e "RUBY_VERSION=<ruby version>" \
+  -e "API_NAME=<API NAME>" \
+  -e "API_PASSWORD=<API PASSWORD>"
+  rubybench/ruby_releases_discourse
 ```
 
-#### Setup containers for PostgreSQL and MySQL
+#### rubybench/rails_trunk
+
+Intended to run Rails benchmarks on a per-commit basis:
+
 ```
-sudo docker run --name postgres -d postgres:9.3.5 && \
-sudo docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" -d mysql:5.6.24 && \
+docker-compose run \
+  -e "RAILS_COMMIT_HASH=$COMMIT_HASH" \
+  -e "API_NAME=$API_NAME" \
+  -e "API_PASSWORD=$API_PASSWORD" \
+  -e "MYSQL2_PREPARED_STATEMENTS=1" \
+  -e "INCLUDE_PATTERNS=$PATTERNS" \
+  rails_master \
+  /bin/bash -l -c "./runner"
+```
+
+#### rubybench/rails_release
+###### TODO: run with docker-compose
+
+Intended to run Rails benchmarks on a per-release basis:
+
+```
+# Run postgres, mysql and redis containers
+sudo docker run --name postgres -d postgres:9.3.5
+sudo docker run --name mysql -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" -d mysql:5.6.24
 sudo docker run --name redis -d redis:2.8.19
-```
 
-#### Run benchmarks
-```
-sudo docker run --rm \
---link postgres:postgres \
---link mysql:mysql \
---link redis:redis \
--e "RAILS_COMMIT_HASH=<commit sha1>" \
--e "API_NAME=<API NAME>" \
--e "API_PASSWORD=<API PASSWORD>" \
--e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>" \
-rubybench/rails_trunk
+docker run --rm \
+  --link postgres:postgres \
+  --link mysql:mysql \
+  --link redis:redis \
+  -e "RAILS_VERSION=<Rails version>" \
+  -e "API_NAME=<API NAME>" \
+  -e "API_PASSWORD=<API PASSWORD>" \
+  -e "INCLUDE_PATTERNS=<pattern1,pattern2,pattern3>" \
+  rubybench/rails_releases
 ```
