@@ -4,7 +4,7 @@ MAINTAINER Noah Gibbs "the.codefolio.guy@gmail.com"
 
 RUN git clone --branch stable --single-branch --verbose https://github.com/discourse/discourse.git
 RUN git clone --branch master --single-branch --verbose https://github.com/noahgibbs/rails_ruby_bench.git
-RUN git clone --branch master --single-branch --verbose https://github.com/noahgibbs/ruby-bench-suite.git
+RUN git clone --branch master --single-branch --verbose https://github.com/discourse/ruby-bench-suite.git
 
 # Discourse dependencies not installed on ruby_releases_base
 RUN apt-get install -y redis-tools jhead libpcre3-dev imagemagick optipng pngquant gifsicle jpegoptim
