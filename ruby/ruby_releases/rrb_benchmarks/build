@@ -1,0 +1,4 @@
+!#/bin/bash
+set -e
+
+docker build --no-cache -t rubybench/ruby_releases_rrb .
