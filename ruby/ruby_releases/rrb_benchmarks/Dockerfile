@@ -1,5 +1,4 @@
-#FROM rubybench/ruby_releases_base:20170213.1
-FROM rubybench/ruby_releases_base:latest
+FROM rubybench/ruby_releases_base:0.7
 MAINTAINER Noah Gibbs "the.codefolio.guy@gmail.com"
 
 RUN git clone --branch stable --single-branch --verbose https://github.com/discourse/discourse.git
