@@ -35,6 +35,7 @@ if [ "$RUBY_BENCHMARKS" = true ]; then
     --executables ruby \
     --repeat-count 1 \
     --output \
+    --with-jit \
     $PATTERNS
 else
   echo "Skipping Ruby benchmarks"
