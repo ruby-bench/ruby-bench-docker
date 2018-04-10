@@ -24,6 +24,7 @@ if [ "$RUBY_BENCHMARKS" = true ]; then
   ruby /ruby-bench-suite/ruby/benchmarks/driver.rb \
     --executables ruby \
     --repeat-count 2 \
+    --output \
     $PATTERNS
 else
   echo "Skipping Ruby benchmarks"
