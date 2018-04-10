@@ -1,4 +1,4 @@
-FROM rubybench/ruby_releases_base:0.7
+FROM rubybench/ruby_releases_base:20180410.1
 
 RUN git clone --verbose --branch master --single-branch https://github.com/ruby-bench/ruby-bench-suite.git
 
