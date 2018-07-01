@@ -23,6 +23,8 @@ autoconf
 make --quiet -j
 make install --quiet -j
 rbenv global system
+gem install benchmark_driver -v 0.12.0
+gem install benchmark_driver-output-rubybench -v 0.2.0
 
 cd /
 
