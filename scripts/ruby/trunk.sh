@@ -20,11 +20,7 @@ PATTERNS=$8
 
 set -x
 
-# Temporarily using k0kubun/ruby_trunk until the rubybench/ruby_trunk
-# Docker image is automated to be built from ruby-bench-docker.
-
-docker pull k0kubun/ruby_trunk
-#docker pull rubybench/ruby_trunk
+docker pull rubybench/ruby_trunk
 
 docker run --rm \
   -e "RUBY_BENCHMARKS=$RUBY_BENCHMARKS" \
@@ -35,5 +31,4 @@ docker run --rm \
   -e "API_NAME=$API_NAME" \
   -e "API_PASSWORD=$API_PASSWORD" \
   -e "INCLUDE_PATTERNS=$PATTERNS" \
-  k0kubun/ruby_trunk
-  #rubybench/ruby_trunk
+  rubybench/ruby_trunk
