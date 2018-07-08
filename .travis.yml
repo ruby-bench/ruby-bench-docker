@@ -1,5 +1,6 @@
 script:
-  - if [[ "$TRAVIS_BRANCH" = "master" && "$TRAVIS_EVENT_TYPE" = "push" ]]; then
+  - |
+    if [[ "$TRAVIS_BRANCH" = "master" && "$TRAVIS_EVENT_TYPE" = "push" ]]; then
       curl -f -H "Content-Type: application/json" --data '{"docker_tag": "master"}' -X POST \
         "https://registry.hub.docker.com/u/rubybench/ruby_trunk/trigger/${DOCKER_HUB_TRIGGER_TOKEN}/"
     fi
