@@ -1,5 +1,9 @@
 script:
   - if [[ "$TRAVIS_BRANCH" = "master" && "$TRAVIS_EVENT_TYPE" = "push" ]]; then
+      curl -f -H "Content-Type: application/json" --data '{"docker_tag": "master"}' -X POST \
+        "https://registry.hub.docker.com/u/rubybench/ruby_trunk/trigger/${DOCKER_HUB_TRIGGER_TOKEN}/"
+    fi
+  - if [[ "$TRAVIS_BRANCH" = "master" && "$TRAVIS_EVENT_TYPE" = "push" ]]; then
       openssl aes-256-cbc -K $encrypted_a641d77e729e_key -iv $encrypted_a641d77e729e_iv
         -in deploy/deploy_rsa.enc -out /tmp/deploy_rsa -d;
 
