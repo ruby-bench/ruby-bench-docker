@@ -1,16 +1,16 @@
-branches:
-  only:
-    - master
 script:
   - |
-    curl -f -H "Content-Type: application/json" --data '{"docker_tag": "master"}' -X POST \
-      "https://registry.hub.docker.com/u/rubybench/ruby_trunk/trigger/${DOCKER_HUB_TRIGGER_TOKEN}/"
-  - |
-    openssl aes-256-cbc -K $encrypted_a641d77e729e_key -iv $encrypted_a641d77e729e_iv
-      -in deploy/deploy_rsa.enc -out /tmp/deploy_rsa -d;
+    if [[ "$TRAVIS_BRANCH" = "master" && "$TRAVIS_EVENT_TYPE" = "push" ]]; then
+      curl -f -H "Content-Type: application/json" --data '{"docker_tag": "master"}' -X POST \
+        "https://registry.hub.docker.com/u/rubybench/ruby_trunk/trigger/${DOCKER_HUB_TRIGGER_TOKEN}/"
+    fi
+  - if [[ "$TRAVIS_BRANCH" = "master" && "$TRAVIS_EVENT_TYPE" = "push" ]]; then
+      openssl aes-256-cbc -K $encrypted_a641d77e729e_key -iv $encrypted_a641d77e729e_iv
+        -in deploy/deploy_rsa.enc -out /tmp/deploy_rsa -d;
 
-    eval "$(ssh-agent -s)";
-    chmod 600 /tmp/deploy_rsa;
-    ssh-add /tmp/deploy_rsa;
+      eval "$(ssh-agent -s)";
+      chmod 600 /tmp/deploy_rsa;
+      ssh-add /tmp/deploy_rsa;
 
-    ssh -o StrictHostKeyChecking=no root@$RUNNER_HOST "tsp git -C ./ruby-bench-docker pull --rebase origin master && tsp ./ruby-bench-docker/deploy/script";
+      ssh -o StrictHostKeyChecking=no root@$RUNNER_HOST "tsp git -C ./ruby-bench-docker pull --rebase origin master && tsp ./ruby-bench-docker/deploy/script";
+    fi
