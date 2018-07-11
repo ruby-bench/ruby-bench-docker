@@ -9,4 +9,7 @@ ADD config.sub /ruby/tool/config.sub
 ADD config.guess /ruby/tool/config.guess
 RUN chmod 755 runner
 
+# To avoid invalid byte sequence in benchmark_driver's source handling
+ENV LANG C.UTF-8
+
 CMD /bin/bash -l -c "./runner"
