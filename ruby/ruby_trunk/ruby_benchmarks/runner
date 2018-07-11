@@ -24,7 +24,7 @@ make --quiet -j
 make install --quiet -j
 rbenv global system
 gem install benchmark_driver -v 0.14.6
-gem install benchmark_driver-output-rubybench -v 0.2.4
+gem install benchmark_driver-output-rubybench -v 0.2.5
 
 cd /
 
@@ -34,9 +34,8 @@ fi
 
 if [ "$RUBY_BENCHMARKS" = true ]; then
   ruby /ruby-bench-suite/ruby/driver.rb \
-    --executables ruby \
     --repeat-count 1 \
-    --output \
+    --runner ips \
     --with-jit \
     $PATTERNS
 else
@@ -45,10 +44,8 @@ fi
 
 if [ "$RUBY_MEMORY_BENCHMARKS" = true ]; then
   ruby /ruby-bench-suite/ruby/driver.rb \
-    --executables ruby \
     --repeat-count 1 \
     --runner rsskb \
-    --output \
     $PATTERNS
 else
   echo "Skipping Ruby memory benchmarks"

@@ -4,7 +4,7 @@ set -e
 echo "Using Ruby $RUBY_VERSION"
 rbenv global $RUBY_VERSION
 gem install benchmark_driver -v 0.14.6
-gem install benchmark_driver-output-rubybench -v 0.2.4
+gem install benchmark_driver-output-rubybench -v 0.2.5
 
 echo "Checking RUBY_VERSION in environment"
 echo "RUBY_VERSION=$RUBY_VERSION"
@@ -24,9 +24,8 @@ fi
 if [ "$RUBY_BENCHMARKS" = true ]; then
   echo "Running benchmarks with Ruby $RUBY_VERSION"
   ruby /ruby-bench-suite/ruby/driver.rb \
-    --executables ruby \
     --repeat-count 2 \
-    --output \
+    --runner ips \
     --with-jit \
     $PATTERNS
 else
@@ -36,10 +35,8 @@ fi
 if [ "$RUBY_MEMORY_BENCHMARKS" = true ]; then
   echo "Running memory benchmarks with Ruby $RUBY_VERSION"
   ruby /ruby-bench-suite/ruby/driver.rb \
-    --executables ruby \
     --repeat-count 2 \
     --runner rsskb \
-    --output \
     $PATTERNS
 else
   echo "Skipping Ruby memory benchmarks"
