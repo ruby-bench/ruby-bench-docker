@@ -3,7 +3,7 @@ set -e
 
 echo "Using Ruby $RUBY_VERSION"
 rbenv global $RUBY_VERSION
-gem install benchmark_driver -v 0.14.0
+gem install benchmark_driver -v 0.14.6
 gem install benchmark_driver-output-rubybench -v 0.2.2
 
 echo "Checking RUBY_VERSION in environment"
