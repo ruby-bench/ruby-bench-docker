@@ -4,7 +4,7 @@ set -e
 echo "Using Ruby $RUBY_VERSION"
 rbenv global $RUBY_VERSION
 gem install benchmark_driver -v 0.14.0
-gem install benchmark_driver-output-rubybench -v 0.2.1
+gem install benchmark_driver-output-rubybench -v 0.2.2
 
 echo "Checking RUBY_VERSION in environment"
 echo "RUBY_VERSION=$RUBY_VERSION"
@@ -23,7 +23,7 @@ fi
 
 if [ "$RUBY_BENCHMARKS" = true ]; then
   echo "Running benchmarks with Ruby $RUBY_VERSION"
-  ruby /ruby-bench-suite/ruby/benchmarks/driver.rb \
+  ruby /ruby-bench-suite/ruby/driver.rb \
     --executables ruby \
     --repeat-count 2 \
     --output \
