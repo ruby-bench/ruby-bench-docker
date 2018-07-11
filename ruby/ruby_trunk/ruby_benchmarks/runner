@@ -33,7 +33,7 @@ if [ "$INCLUDE_PATTERNS" ]; then
 fi
 
 if [ "$RUBY_BENCHMARKS" = true ]; then
-  ruby /ruby-bench-suite/ruby/benchmarks/driver.rb \
+  ruby /ruby-bench-suite/ruby/driver.rb \
     --executables ruby \
     --repeat-count 1 \
     --output \
