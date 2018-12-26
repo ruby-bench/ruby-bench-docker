@@ -16,32 +16,25 @@ RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh # or /etc/profile
 RUN echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 
 # Pick the last 3 patches
-RUN /bin/bash -l -c "rbenv install 1.9.3-p547"
-RUN /bin/bash -l -c "rbenv install 1.9.3-p550"
 RUN /bin/bash -l -c "rbenv install 1.9.3-p551"
 
-RUN /bin/bash -l -c "rbenv install 2.0.0-p645"
-RUN /bin/bash -l -c "rbenv install 2.0.0-p647"
 RUN /bin/bash -l -c "rbenv install 2.0.0-p648"
 
-RUN /bin/bash -l -c "rbenv install 2.1.8"
-RUN /bin/bash -l -c "rbenv install 2.1.9"
 RUN /bin/bash -l -c "rbenv install 2.1.10"
 
-RUN /bin/bash -l -c "rbenv install 2.2.5"
-RUN /bin/bash -l -c "rbenv install 2.2.6"
-RUN /bin/bash -l -c "rbenv install 2.2.7"
+RUN /bin/bash -l -c "rbenv install 2.2.10"
 
-RUN /bin/bash -l -c "rbenv install 2.3.5"
 RUN /bin/bash -l -c "rbenv install 2.3.6"
 RUN /bin/bash -l -c "rbenv install 2.3.7"
+RUN /bin/bash -l -c "rbenv install 2.3.8"
 
-RUN /bin/bash -l -c "rbenv install 2.4.2"
 RUN /bin/bash -l -c "rbenv install 2.4.3"
 RUN /bin/bash -l -c "rbenv install 2.4.4"
+RUN /bin/bash -l -c "rbenv install 2.4.5"
 
 RUN /bin/bash -l -c "rbenv install 2.5.0"
 RUN /bin/bash -l -c "rbenv install 2.5.1"
+RUN /bin/bash -l -c "rbenv install 2.5.2"
 
 RUN /bin/bash -l -c "rbenv install 2.6.0"
 
