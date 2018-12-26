@@ -1,9 +1,9 @@
 # rubybench/ruby_releases_base:0.7
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER Guo Xiang "tgx_world@hotmail.com"
 
 RUN apt-get update
-RUN apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev git curl libtool libxslt-dev libxml2-dev libpq-dev gawk curl pngcrush python-software-properties software-properties-common tasksel apache2-utils postgresql-client libffi-dev
+RUN apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev git curl libtool libxslt-dev libxml2-dev libpq-dev gawk curl pngcrush python-software-properties software-properties-common tasksel apache2-utils postgresql-client libffi-dev ruby
 
 RUN git config --global user.email "you@example.com" &&\
     git config --global user.name "Your Name"

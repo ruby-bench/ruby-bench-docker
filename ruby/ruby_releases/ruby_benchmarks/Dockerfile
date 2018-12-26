@@ -1,4 +1,4 @@
-FROM rubybench/ruby_releases_base:20180410.1
+FROM rubybench/ruby_releases_base:20181226.1
 
 RUN /bin/bash -l -c "git -C /root/.rbenv/plugins/ruby-build pull origin master && rbenv install 2.6.0-preview2"
 RUN git clone --verbose --branch master --single-branch https://github.com/ruby-bench/ruby-bench-suite.git
