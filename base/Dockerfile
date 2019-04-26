@@ -1,6 +1,6 @@
-# rubybench/ruby:0.5
+# rubybench/ruby:2.6.3
 FROM ubuntu:16.04
-MAINTAINER Guo Xiang "tgx_world@hotmail.com"
+MAINTAINER Guo Xiang
 
 ENV LANG en_US.UTF-8
 
@@ -10,12 +10,12 @@ RUN locale-gen en_US.UTF-8
 RUN git config --global user.email "you@example.com" && \
     git config --global user.name "Your Name"
 
-RUN git clone https://github.com/sstephenson/rbenv.git /root/.rbenv
-RUN git clone https://github.com/sstephenson/ruby-build.git /root/.rbenv/plugins/ruby-build
+RUN git clone https://github.com/rbenv/rbenv.git /root/.rbenv
+RUN git clone https://github.com/rbenv/ruby-build.git /root/.rbenv/plugins/ruby-build
 RUN ./root/.rbenv/plugins/ruby-build/install.sh
 ENV PATH /root/.rbenv/bin:$PATH
 RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh # or /etc/profile
 RUN echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 
-RUN /bin/bash -l -c "rbenv install 2.4.1"
-RUN /bin/bash -l -c "rbenv global 2.4.1"
+RUN /bin/bash -l -c "rbenv install 2.6.3"
+RUN /bin/bash -l -c "rbenv global 2.6.3"
