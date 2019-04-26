@@ -1,5 +1,5 @@
 FROM rubybench/ruby:0.3
-MAINTAINER Guo Xiang "tgx_world@hotmail.com"
+MAINTAINER Guo Xiang
 
 RUN git clone --verbose --branch trunk --single-branch https://github.com/ruby/ruby.git
 RUN git clone --verbose --branch master --single-branch https://github.com/ruby-bench/ruby-bench-suite.git

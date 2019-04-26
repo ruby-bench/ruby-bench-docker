@@ -1,5 +1,5 @@
 FROM rubybench/ruby_releases_base:0.7
-MAINTAINER Guo Xiang "tgx_world@hotmail.com"
+MAINTAINER Guo Xiang
 
 # Required for Discourse bench
 RUN apt-get install wget
