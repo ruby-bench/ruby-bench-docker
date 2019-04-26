@@ -26,9 +26,9 @@ fi
 echo "Using Rails $RAILS_VERSION"
 sed -i "s/gem 'rails', path: '\/rails'/gem 'rails', '$RAILS_VERSION'/g" Gemfile
 
-echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+echo "gem: --no-document" > ~/.gemrc
 gem update bundler
-gem install bundler --no-ri --no-rdoc
+gem install bundler --no-document
 bundle install -j4
 
 cd /ruby-bench-suite/support/setup

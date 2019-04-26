@@ -12,7 +12,7 @@ if [ "$INCLUDE_PATTERNS" ]; then
 fi
 
 echo "Using Bundler $BUNDLER_VERSION"
-echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+echo "gem: --no-document" > ~/.gemrc
 # Ensure we cleanup all exisiting versions of bundler.
 gem uninstall bundler --all --force
 gem install bundler -v "$BUNDLER_VERSION"

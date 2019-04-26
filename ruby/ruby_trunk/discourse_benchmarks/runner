@@ -42,7 +42,7 @@ mv /database.yml config/database.yml
 mv /discourse.conf config/discourse.conf
 
 # For faster Bundle install
-echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+echo "gem: --no-document" > ~/.gemrc
 gem install bundler facter
 rbenv rehash
 mv /cache /discourse/vendor/cache

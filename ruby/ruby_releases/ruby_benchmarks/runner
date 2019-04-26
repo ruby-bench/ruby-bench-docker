@@ -51,7 +51,7 @@ fi
 
 if [ "$LIQUID_BENCHMARK" = true ]; then
   echo "Running liquid benchmarks with Ruby $RUBY_VERSION"
-  gem install bundler --no-ri --no-rdoc
+  gem install bundler --no-document
   cd /ruby-bench-suite/liquid_benchmarks/liquid
   bundle install --without test
   bundle exec ruby /ruby-bench-suite/liquid_benchmarks/driver.rb

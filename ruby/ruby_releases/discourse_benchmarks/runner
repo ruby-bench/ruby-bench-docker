@@ -32,7 +32,7 @@ mv /discourse.conf config/discourse.conf
 mv /ruby-bench-suite/discourse/benchmarks/bench.rb script/bench.rb
 
 # For faster Bundle install
-echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+echo "gem: --no-document" > ~/.gemrc
 gem install bundler facter
 rbenv rehash
 mv /cache /discourse/vendor/cache

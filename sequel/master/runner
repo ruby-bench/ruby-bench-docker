@@ -15,7 +15,7 @@ createdb -h postgres -U postgres rubybench
 echo "DROP DATABASE IF EXISTS rubybench" | mysql -u root -h mysql
 echo "CREATE DATABASE rubybench" | mysql -u root -h mysql
 
-echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+echo "gem: --no-document" > ~/.gemrc
 gem update bundler
 
 cd /ruby-bench-suite/sequel
