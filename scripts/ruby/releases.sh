@@ -1,14 +1,5 @@
 #!/bin/bash
 
-mkdir -p $HOME/logs/ruby/releases
-exec &>> $HOME/logs/ruby/releases/run.log
-
-echo
-echo
-echo
-echo
-echo --------------$(date)
-
 RUBY_BENCHMARKS=$1
 RUBY_MEMORY_BENCHMARKS=$2
 OPTCARROT_BENCHMARK=$3
@@ -17,6 +8,16 @@ RUBY_VERSION=$5
 API_NAME=$6
 API_PASSWORD=$7
 PATTERNS=$8
+
+mkdir -p $HOME/logs/ruby/releases
+DATETIME=$(date -d "today" +"%Y%m%d%H%M")
+exec &>> $HOME/logs/ruby/releases/$RUBY_VERSION-$DATETIME.log
+
+echo
+echo
+echo
+echo
+echo --------------$(date)
 
 set -x
 

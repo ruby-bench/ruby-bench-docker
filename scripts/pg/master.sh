@@ -1,18 +1,19 @@
 #!/bin/bash
 
+COMMIT_HASH=$1
+API_NAME=$2
+API_PASSWORD=$3
+PATTERNS=$4
+
 mkdir -p $HOME/logs/pg/master
-exec &>> $HOME/logs/pg/master/run.log
+DATETIME=$(date -d "today" +"%Y%m%d%H%M")
+exec &>> $HOME/logs/pg/master/$COMMIT_HASH-$DATETIME.log
 
 echo
 echo
 echo
 echo
 echo "-------------$(date)"
-
-COMMIT_HASH=$1
-API_NAME=$2
-API_PASSWORD=$3
-PATTERNS=$4
 
 set -x
 

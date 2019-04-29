@@ -1,19 +1,20 @@
 #!/bin/bash
 
+RAILS_VERSION=$1
+API_NAME=$2
+API_PASSWORD=$3
+PREPARED_STATEMENTS=$4
+PATTERNS=$5
+
 mkdir -p $HOME/logs/rails/releases
-exec &>> $HOME/logs/rails/releases/run.log
+DATETIME=$(date -d "today" +"%Y%m%d%H%M")
+exec &>> $HOME/logs/rails/releases/$RAILS_VERSION-$DATETIME.log
 
 echo
 echo
 echo
 echo
 echo "-------------- $(date)"
-
-RAILS_VERSION=$1
-API_NAME=$2
-API_PASSWORD=$3
-PREPARED_STATEMENTS=$4
-PATTERNS=$5
 
 set -x
 

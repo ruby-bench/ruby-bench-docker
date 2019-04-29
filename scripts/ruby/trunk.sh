@@ -1,14 +1,5 @@
 #!/bin/bash
 
-mkdir -p $HOME/logs/ruby/trunk
-exec &>> $HOME/logs/ruby/trunk/run.log
-
-echo
-echo
-echo
-echo
-echo --------------$(date)
-
 RUBY_BENCHMARKS=$1
 RUBY_MEMORY_BENCHMARKS=$2
 OPTCARROT_BENCHMARK=$3
@@ -17,6 +8,16 @@ RUBY_COMMIT_HASH=$5
 API_NAME=$6
 API_PASSWORD=$7
 PATTERNS=$8
+
+mkdir -p $HOME/logs/ruby/trunk
+DATETIME=$(date -d "today" +"%Y%m%d%H%M")
+exec &>> $HOME/logs/ruby/trunk/$RUBY_COMMIT_HASH-$DATETIME.log
+
+echo
+echo
+echo
+echo
+echo --------------$(date)
 
 set -x
 

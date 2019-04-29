@@ -1,14 +1,15 @@
 #!/bin/bash
 
-mkdir -p $HOME/logs/sequel/releases
-exec &>> $HOME/logs/sequel/releases/run.log
-
-echo "-----------$(date)"
-
 SEQUEL_VERSION=$1
 API_NAME=$2
 API_PASSWORD=$3
 PATTERNS=$4
+
+mkdir -p $HOME/logs/sequel/releases
+DATETIME=$(date -d "today" +"%Y%m%d%H%M")
+exec &>> $HOME/logs/sequel/releases/$SEQUEL_VERSION-$DATETIME.log
+
+echo "-----------$(date)"
 
 set -x
 

@@ -1,18 +1,19 @@
 #!/bin/bash
 
+BUNDLER_VERSION=$1
+API_NAME=$2
+API_PASSWORD=$3
+PATTERNS=$4
+
 mkdir -p $HOME/logs/bundler/releases
-exec &>> $HOME/logs/bundler/releases/run.log
+DATETIME=$(date -d "today" +"%Y%m%d%H%M")
+exec &>> $HOME/logs/bundler/releases/$BUNDLER_VERSION-$DATETIME.log
 
 echo
 echo
 echo
 echo
 echo --------------$(date)
-
-BUNDLER_VERSION=$1
-API_NAME=$2
-API_PASSWORD=$3
-PATTERNS=$4
 
 set -x
 
