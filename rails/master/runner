@@ -16,7 +16,7 @@ echo "DROP DATABASE IF EXISTS rubybench" | mysql -u root -h mysql
 echo "CREATE DATABASE rubybench" | mysql -u root -h mysql
 
 echo "gem: --no-document" > ~/.gemrc
-gem update bundler
+gem install bundler -v 1.17.3
 
 cd /ruby-bench-suite/rails
 git pull --rebase origin master
