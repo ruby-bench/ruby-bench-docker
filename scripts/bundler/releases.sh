@@ -7,7 +7,7 @@ PATTERNS=$4
 
 mkdir -p $HOME/logs/bundler/releases
 DATETIME=$(date -d "today" +"%Y%m%d%H%M")
-exec &>> $HOME/logs/bundler/releases/$BUNDLER_VERSION-$DATETIME.log
+exec &>> $HOME/logs/bundler/releases/$DATETIME-$BUNDLER_VERSION.log
 
 echo
 echo

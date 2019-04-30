@@ -11,7 +11,7 @@ PATTERNS=$8
 
 mkdir -p $HOME/logs/ruby/releases
 DATETIME=$(date -d "today" +"%Y%m%d%H%M")
-exec &>> $HOME/logs/ruby/releases/$RUBY_VERSION-$DATETIME.log
+exec &>> $HOME/logs/ruby/releases/$DATETIME-$RUBY_VERSION.log
 
 echo
 echo

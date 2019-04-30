@@ -7,7 +7,7 @@ PATTERNS=$4
 
 mkdir -p $HOME/logs/pg/master
 DATETIME=$(date -d "today" +"%Y%m%d%H%M")
-exec &>> $HOME/logs/pg/master/$COMMIT_HASH-$DATETIME.log
+exec &>> $HOME/logs/pg/master/$DATETIME-$COMMIT_HASH.log
 
 echo
 echo

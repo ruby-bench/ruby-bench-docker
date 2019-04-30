@@ -8,7 +8,7 @@ PATTERNS=$5
 
 mkdir -p $HOME/logs/rails/releases
 DATETIME=$(date -d "today" +"%Y%m%d%H%M")
-exec &>> $HOME/logs/rails/releases/$RAILS_VERSION-$DATETIME.log
+exec &>> $HOME/logs/rails/releases/$DATETIME-$RAILS_VERSION.log
 
 echo
 echo

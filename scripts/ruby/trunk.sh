@@ -11,7 +11,7 @@ PATTERNS=$8
 
 mkdir -p $HOME/logs/ruby/trunk
 DATETIME=$(date -d "today" +"%Y%m%d%H%M")
-exec &>> $HOME/logs/ruby/trunk/$RUBY_COMMIT_HASH-$DATETIME.log
+exec &>> $HOME/logs/ruby/trunk/$DATETIME-$RUBY_COMMIT_HASH.log
 
 echo
 echo

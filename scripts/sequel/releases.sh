@@ -7,7 +7,7 @@ PATTERNS=$4
 
 mkdir -p $HOME/logs/sequel/releases
 DATETIME=$(date -d "today" +"%Y%m%d%H%M")
-exec &>> $HOME/logs/sequel/releases/$SEQUEL_VERSION-$DATETIME.log
+exec &>> $HOME/logs/sequel/releases/$DATETIME-$SEQUEL_VERSION.log
 
 echo "-----------$(date)"
 

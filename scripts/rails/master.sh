@@ -7,7 +7,7 @@ PATTERNS=$4
 
 mkdir -p $HOME/logs/rails/master
 DATETIME=$(date -d "today" +"%Y%m%d%H%M")
-exec &>> $HOME/logs/rails/master/$COMMIT_HASH-$DATETIME.log
+exec &>> $HOME/logs/rails/master/$DATETIME-$COMMIT_HASH.log
 
 echo
 echo
