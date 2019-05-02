@@ -17,11 +17,14 @@ echo --------------$(date)
 
 set -x
 
-docker pull rubybench/bundler_releases
+cd $HOME/ruby-bench-docker/bundler/bundler_releases
 
-docker run --rm \
+docker-compose run \
   -e "BUNDLER_VERSION=$BUNDLER_VERSION" \
   -e "API_NAME=$API_NAME" \
   -e "API_PASSWORD=$API_PASSWORD" \
   -e "INCLUDE_PATTERNS=$PATTERNS" \
-  rubybench/bundler_releases
+  bundler_releases \
+  /bin/bash -l -c "./runner"
+
+docker-compose down -v
