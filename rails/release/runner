@@ -25,7 +25,13 @@ fi
 
 echo "Using Rails $RAILS_VERSION"
 sed -i "s/gem 'rails', path: '\/rails'/gem 'rails', '$RAILS_VERSION'/g" Gemfile
+
+echo "gem: --no-document" > ~/.gemrc
+gem install bundler -v 1.17.3
 bundle install -j4
+
+cd /ruby-bench-suite/support/setup
+bundle install
 
 echo "Running benchmarks with Rails $RAILS_VERSION"
 cd /ruby-bench-suite/rails/benchmarks
