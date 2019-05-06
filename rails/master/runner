@@ -49,4 +49,4 @@ bundle update
 
 echo "Running benchmarks with Rails $RAILS_COMMIT_HASH"
 cd /ruby-bench-suite/rails/benchmarks
-ruby driver.rb --pattern $PATTERNS
+ruby driver.rb $PATTERNS

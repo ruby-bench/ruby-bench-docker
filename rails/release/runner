@@ -32,4 +32,4 @@ echo "CREATE DATABASE rubybench" | mysql -u root -h "$MYSQL_PORT_3306_TCP_ADDR" 
 
 echo "Running benchmarks with Rails $RAILS_VERSION"
 cd /ruby-bench-suite/rails/benchmarks
-ruby driver.rb --pattern $PATTERNS
+ruby driver.rb $PATTERNS
