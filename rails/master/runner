@@ -42,11 +42,11 @@ fi
 
 cd /ruby-bench-suite/rails
 sed -i "s/gem 'rails', github: 'rails'/gem 'rails', path: '\/rails'/g" Gemfile
-bundle install -j4
+bundle update
 
 cd /ruby-bench-suite/support/setup
-bundle install
+bundle update
 
 echo "Running benchmarks with Rails $RAILS_COMMIT_HASH"
 cd /ruby-bench-suite/rails/benchmarks
-ruby driver.rb $PATTERNS
+ruby driver.rb --pattern $PATTERNS
