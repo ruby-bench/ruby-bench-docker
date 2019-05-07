@@ -7,7 +7,7 @@ PATTERNS=$4
 
 mkdir -p $HOME/logs/ruby/discourse/trunk
 DATETIME=$(date -d "today" +"%Y%m%d%H%M")
-# exec &>> $HOME/logs/ruby/discourse/trunk/$DATETIME-$RUBY_COMMIT_HASH.log
+exec &>> $HOME/logs/ruby/discourse/trunk/$DATETIME-$RUBY_COMMIT_HASH.log
 
 echo
 echo
