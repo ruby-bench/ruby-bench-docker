@@ -9,7 +9,7 @@ cd /ruby
 git pull --rebase origin trunk
 
 if [ -z "$RUBY_COMMIT_HASH" ]; then
-  echo "Running benchmarks using lastest Ruby commit"
+  echo "Running benchmarks using latest Ruby commit"
 else
   echo "Running benchmarks using Ruby commit $RUBY_COMMIT_HASH"
   git reset --hard $RUBY_COMMIT_HASH
@@ -21,30 +21,32 @@ make --quiet -j
 make install --quiet -j
 rbenv global trunk
 
-while ! exec 6<>/dev/tcp/${POSTGRES_PORT_5432_TCP_ADDR}/${POSTGRES_PORT_5432_TCP_PORT}; do
-  echo "$(date) - still trying to connect to Postgres server"
-  sleep 1
+until pg_isready -h postgres; do
+   echo "PG not ready. retrying..."
+   sleep 1
 done
 
-while ! exec 6<>/dev/tcp/${REDIS_PORT_6379_TCP_ADDR}/${REDIS_PORT_6379_TCP_PORT}; do
-  echo "$(date) - still trying to connect to Redis server"
-  sleep 1
-done
+# For faster Bundle install
+echo "gem: --no-document" > ~/.gemrc
+gem install bundler -v 1.17.3
+gem install facter
+gem install CFPropertyList
 
-cd /
-createdb -T template0 -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres discourse_profile
-pg_restore --no-owner -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres -d discourse_profile discourse_profile.dump
+if [[ ! $(psql -h postgres -U postgres -tc \
+  "SELECT 1 FROM pg_database WHERE datname = 'discourse_profile'" | xargs) = 1 ]]; then
+  cd /
+  createdb -T template0 -h postgres -U postgres discourse_profile
+  pg_restore --no-owner -h postgres -U postgres -d discourse_profile discourse_profile.dump
+fi
 
 cd /discourse
 git reset --hard $DISCOURSE_COMMIT_HASH
 mv /ruby-bench-suite/discourse/benchmarks/bench.rb script/bench.rb
 mv /database.yml config/database.yml
 mv /discourse.conf config/discourse.conf
+mv /profile_db_generator.rb script/profile_db_generator.rb
 
-# For faster Bundle install
-echo "gem: --no-document" > ~/.gemrc
-gem install bundler facter
 rbenv rehash
 mv /cache /discourse/vendor/cache
-bundle install --without development:test -j4 --no-cache --no-prune
-ruby script/bench.rb -m -n -b 2
+bundle install --without development test -j4 --no-cache --no-prune --path vendor/cache
+ruby script/bench.rb -n -b 2 -c 3
