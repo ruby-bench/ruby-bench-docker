@@ -1,0 +1,10 @@
+#!/bin/bash
+
+RUBY_COMMIT_HASH=$1
+IMAGE_NAME=rubybench/ruby:$RUBY_COMMIT_HASH
+
+docker build --no-cache --build-arg RUBY_COMMIT_HASH=$RUBY_COMMIT_HASH -t $IMAGE_NAME .
+
+if [ -n "$PUSH" ]; then
+  docker push $IMAGE_NAME
+fi
