@@ -37,6 +37,7 @@ RUN /bin/bash -l -c "rbenv install 2.5.3"
 
 RUN /bin/bash -l -c "rbenv install 2.6.0"
 RUN /bin/bash -l -c "rbenv install 2.6.1"
+RUN /bin/bash -l -c "rbenv install 2.6.2"
 RUN /bin/bash -l -c "rbenv install 2.6.3"
 
 # Install Github Ruby with per method cache
