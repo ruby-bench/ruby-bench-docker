@@ -19,11 +19,22 @@ echo
 echo
 echo --------------$(date)
 
+IMAGE_NAME=rubybench/ruby:$RUBY_COMMIT_HASH
+
+if [[ -n $(curl -s -i "https://index.docker.io/v1/repositories/rubybench/ruby/tags/$RUBY_COMMIT_HASH" | grep -o "200 OK") ]]; then
+  echo "Ruby image for commit $RUBY_COMMIT_HASH exists on docker hub. Pulling the image..."
+  docker pull $IMAGE_NAME
+else
+  echo "Couldn't find a ruby image for commit $RUBY_COMMIT_HASH. Building image now..."
+  cd $HOME/ruby-bench-docker/ruby/ruby_trunk/ruby_benchmarks/per_commit_image
+  PUSH=1 ./build $RUBY_COMMIT_HASH
+fi
+
 set -x
 
-docker pull rubybench/ruby_trunk
+cd $HOME/ruby-bench-docker/ruby/ruby_trunk/ruby_benchmarks/
 
-docker run --rm \
+docker run --rm -i \
   -e "RUBY_BENCHMARKS=$RUBY_BENCHMARKS" \
   -e "RUBY_MEMORY_BENCHMARKS=$RUBY_MEMORY_BENCHMARKS" \
   -e "OPTCARROT_BENCHMARK=$OPTCARROT_BENCHMARK" \
@@ -32,4 +43,7 @@ docker run --rm \
   -e "API_NAME=$API_NAME" \
   -e "API_PASSWORD=$API_PASSWORD" \
   -e "INCLUDE_PATTERNS=$PATTERNS" \
-  rubybench/ruby_trunk
+  $IMAGE_NAME \
+  /bin/bash -l < runner
+
+docker image rm -f $IMAGE_NAME

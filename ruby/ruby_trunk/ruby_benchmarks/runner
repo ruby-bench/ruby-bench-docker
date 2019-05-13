@@ -1,32 +1,12 @@
 #!/bin/bash
 set -e
 
-cd /ruby-bench-suite
-git fetch origin
-git rebase origin/master
-git submodule init
-git submodule update
+cd /
 
-cd /ruby
-git fetch origin
-git rebase origin/trunk
+git clone --recursive https://github.com/ruby-bench/ruby-bench-suite
 
-if [ -z "$RUBY_COMMIT_HASH" ]; then
-  echo "Running benchmarks using lastest Ruby commit"
-else
-  echo "Running benchmarks using Ruby commit $RUBY_COMMIT_HASH"
-  git reset --hard $RUBY_COMMIT_HASH
-fi
-
-autoconf
-./configure --disable-install-doc --quiet
-make --quiet -j
-make install --quiet -j
-rbenv global system
 gem install benchmark_driver
 gem install benchmark_driver-output-rubybench -v 0.2.6
-
-cd /
 
 if [ "$INCLUDE_PATTERNS" ]; then
   PATTERNS="--pattern $INCLUDE_PATTERNS"
