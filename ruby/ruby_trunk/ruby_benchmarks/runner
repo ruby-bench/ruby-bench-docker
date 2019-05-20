@@ -6,7 +6,7 @@ cd /
 git clone --recursive https://github.com/ruby-bench/ruby-bench-suite
 
 gem install benchmark_driver
-gem install benchmark_driver-output-rubybench -v 0.2.6
+gem install benchmark_driver-output-rubybench -v 0.3.0
 
 if [ "$INCLUDE_PATTERNS" ]; then
   PATTERNS="--pattern $INCLUDE_PATTERNS"
