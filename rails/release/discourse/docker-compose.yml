@@ -1,0 +1,21 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:10
+    networks:
+      - pg-net
+  redis:
+    image: redis:5.0.4
+    networks:
+      - redis-net
+  discourse_rails_releases:
+    build: .
+    networks:
+      - redis-net
+      - pg-net
+    depends_on:
+      - postgres
+      - redis
+networks:
+  redis-net:
+  pg-net:
