@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y wget && \
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
     apt-get update && apt-get install -y \
       postgresql-client-10 \
-      tzdata 
+      tzdata
 
 RUN git clone --branch stable --single-branch --verbose https://github.com/discourse/discourse.git
 RUN git clone --branch master --single-branch https://github.com/ruby-bench/ruby-bench-suite.git

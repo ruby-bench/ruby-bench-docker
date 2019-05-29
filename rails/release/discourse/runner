@@ -26,20 +26,23 @@ fi
 cd /discourse
 export DISCOURSE_COMMIT_HASH=$(git rev-parse HEAD)
 
-mv /ruby-bench-suite/discourse/benchmarks/bench.rb script/bench.rb
+cp /ruby-bench-suite/discourse/benchmarks/bench.rb script/bench.rb
 
-mv /database.yml config/database.yml
-mv /discourse.conf config/discourse.conf
-mv /profile_db_generator.rb script/profile_db_generator.rb
+cp /database.yml config/database.yml
+cp /discourse.conf config/discourse.conf
+cp /profile_db_generator.rb script/profile_db_generator.rb
 
 rbenv rehash
-mv /cache /discourse/vendor/cache
 
-cp Gemfile Gemfile.profile
-gems=(actionmailer actionpack actionview activemodel activerecord activesupport railties)
+cp -r /cache /discourse/vendor/
+
+rm Gemfile.lock
+gems=(actionmailer actionpack actionview activemodel activerecord activesupport railties activejob)
 for gem in "${gems[@]}" ; do
-  sed -i -re "s/(gem '$gem',\s*').+(')/\1$RAILS_VERSION\2/gi"  Gemfile.profile
+  sed -i -re "s/(gem '$gem',\s*').+(')/\1$RAILS_VERSION\2/gi"  Gemfile
 done
 
-BUNDLE_GEMFILE=Gemfile.profile bundle install  --without development test -j4 --no-cache --no-prune --path vendor/cache
+sed -i -re "s/gem 'mini_sql'/gem 'mini_sql', '0.1.10'/gi" Gemfile
+
+bundle install  --without development test -j4 --no-cache --no-prune --path vendor/cache
 ruby script/bench.rb -n -b 2 -c 3
