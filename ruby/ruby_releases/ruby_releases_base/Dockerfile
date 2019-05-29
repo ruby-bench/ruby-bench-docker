@@ -1,4 +1,4 @@
-# rubybench/ruby_releases_base:0.7
+# rubybench/ruby_releases_base:20190529.1
 FROM ubuntu:16.04
 MAINTAINER Guo Xiang
 
