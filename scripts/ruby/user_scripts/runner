@@ -8,7 +8,7 @@ gem install benchmark_driver-output-rubybench -v 0.3.0
 SCRIPT_NAME="$SCRIPT_NAME.rb"
 
 curl --silent $SCRIPT_URL > $SCRIPT_NAME
-curl --silent https://gist.githubusercontent.com/OsamaSayegh/cad2f44426fd5b200909dd924f7378a6/raw/c988b564300943aeb2c1c8cb5158eb468a61e5b5/ruby_runner.rb > ruby_runner.rb
+curl --silent https://raw.githubusercontent.com/ruby-bench/ruby-bench-docker/master/scripts/ruby/user_scripts/ruby_runner.rb > ruby_runner.rb
 
 if ruby -c $SCRIPT_NAME; then
   ruby ruby_runner.rb $SCRIPT_NAME
