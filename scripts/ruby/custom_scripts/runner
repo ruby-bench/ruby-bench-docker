@@ -1,4 +1,0 @@
-#!/bin/bash
-
-curl --silent $SCRIPT_URL > benchmark.rb
-ruby benchmark.rb
