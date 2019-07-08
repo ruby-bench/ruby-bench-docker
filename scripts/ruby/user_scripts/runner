@@ -5,14 +5,7 @@ set -e
 gem install benchmark_driver
 gem install benchmark_driver-output-rubybench -v 0.3.1
 
-SCRIPT_NAME="$SCRIPT_NAME.rb"
-
 curl --silent $SCRIPT_URL > $SCRIPT_NAME
 curl --silent https://raw.githubusercontent.com/ruby-bench/ruby-bench-docker/master/scripts/ruby/user_scripts/ruby_runner.rb > ruby_runner.rb
 
-if ruby -c $SCRIPT_NAME; then
-  ruby ruby_runner.rb $SCRIPT_NAME
-else
-  echo "Invalid Ruby syntax. Exiting..."
-  exit 1
-fi
+ruby ruby_runner.rb $SCRIPT_NAME
