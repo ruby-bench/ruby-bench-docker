@@ -34,6 +34,7 @@ RUN /bin/bash -l -c "rbenv install 2.5.0"
 RUN /bin/bash -l -c "rbenv install 2.5.1"
 RUN /bin/bash -l -c "rbenv install 2.5.2"
 RUN /bin/bash -l -c "rbenv install 2.5.3"
+RUN /bin/bash -l -c "rbenv install 2.5.5"
 
 RUN /bin/bash -l -c "rbenv install 2.6.0"
 RUN /bin/bash -l -c "rbenv install 2.6.1"
