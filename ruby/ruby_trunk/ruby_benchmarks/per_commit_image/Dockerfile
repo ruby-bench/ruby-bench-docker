@@ -9,7 +9,7 @@ RUN apt-get install time
 ARG RUBY_COMMIT_HASH
 ENV RUBY_COMMIT_HASH=$RUBY_COMMIT_HASH
 
-RUN git clone --verbose --branch trunk --single-branch https://github.com/ruby/ruby.git
+RUN git clone --verbose --branch master --single-branch https://github.com/ruby/ruby.git
 
 ADD config.sub /ruby/tool/config.sub
 ADD config.guess /ruby/tool/config.guess
