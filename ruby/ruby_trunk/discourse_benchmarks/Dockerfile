@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y wget && \
       tzdata 
 
 RUN git clone --branch stable --single-branch --verbose https://github.com/discourse/discourse.git
-RUN git clone --verbose --branch trunk --single-branch https://github.com/ruby/ruby.git
+RUN git clone --verbose --branch master --single-branch https://github.com/ruby/ruby.git
 RUN git clone --branch master --single-branch https://github.com/ruby-bench/ruby-bench-suite.git
 
 # Discourse configuration files
