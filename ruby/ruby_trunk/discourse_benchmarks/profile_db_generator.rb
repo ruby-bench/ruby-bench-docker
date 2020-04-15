@@ -70,9 +70,11 @@ unless Rails.env == "profile"
 end
 
 def ensure_perf_test_topic_has_right_title!
-  t = Topic.find(179)
+  t = Topic.where(archetype: :regular).last
   t.title = "I am a topic used for perf tests"
   t.save! if t.title_changed?
+rescue ActiveRecord::RecordInvalid
+  nil
 end
 
 # by default, Discourse has a "system" and `discobot` account

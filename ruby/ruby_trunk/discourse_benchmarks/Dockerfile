@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y wget && \
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
     apt-get update && apt-get install -y \
       postgresql-client-10 \
-      tzdata 
+      tzdata brotli
 
 RUN git clone --branch stable --single-branch --verbose https://github.com/discourse/discourse.git
 RUN git clone --verbose --branch master --single-branch https://github.com/ruby/ruby.git
@@ -25,7 +25,7 @@ ADD config.guess /ruby/tool/config.guess
 ADD runner runner
 RUN chmod 755 runner
 
-ENV DISCOURSE_COMMIT_HASH 63dbac786fc4e9c575d12de6c5531a90f090555b
+ENV DISCOURSE_COMMIT_HASH 76b9be3f19f393a216973b791245228f2d3e92f8
 ENV RAILS_ENV profile
 
 CMD /bin/bash -l -c "./runner"
