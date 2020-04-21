@@ -48,5 +48,8 @@ mv /profile_db_generator.rb script/profile_db_generator.rb
 
 rbenv rehash
 mv /cache /discourse/vendor/cache
-bundle install --without development test -j4 --no-cache --no-prune --path vendor/cache
+bundle config set no-cache 'true'
+bundle config set no-prune 'true'
+bundle config set without 'development test'
+bundle install -j4
 ruby script/bench.rb -n -b 2 -c 3
