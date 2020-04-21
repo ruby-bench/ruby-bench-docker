@@ -1,12 +1,17 @@
 #!/bin/bash
 set -e
 
+until pg_isready -h postgres; do
+   echo "PG not ready. retrying..."
+   sleep 1
+done
+
 cd /ruby-bench-suite
 git pull --rebase origin master
 cp -r discourse/benchmarks/patches/* /discourse/config/initializers/
 
 cd /ruby
-git pull --rebase origin trunk
+git pull --rebase origin master
 
 if [ -z "$RUBY_COMMIT_HASH" ]; then
   echo "Running benchmarks using latest Ruby commit"
@@ -16,19 +21,14 @@ else
 fi
 
 autoconf
-./configure --disable-install-doc --prefix=/root/.rbenv/versions/trunk --quiet
+./configure --disable-install-doc --prefix=/root/.rbenv/versions/master --quiet
 make --quiet -j
 make install --quiet -j
-rbenv global trunk
-
-until pg_isready -h postgres; do
-   echo "PG not ready. retrying..."
-   sleep 1
-done
+rbenv global master
 
 # For faster Bundle install
 echo "gem: --no-document" > ~/.gemrc
-gem install bundler -v 1.17.3
+gem install bundler -v 2.1.1
 gem install facter
 gem install CFPropertyList
 
@@ -38,6 +38,7 @@ if [[ ! $(psql -h postgres -U postgres -tc \
   createdb -T template0 -h postgres -U postgres discourse_profile
   pg_restore --no-owner -h postgres -U postgres -d discourse_profile discourse_profile.dump
 fi
+psql -h postgres -U postgres discourse_profile -c "UPDATE users SET active=true;"
 
 cd /discourse
 git reset --hard $DISCOURSE_COMMIT_HASH
@@ -48,5 +49,8 @@ mv /profile_db_generator.rb script/profile_db_generator.rb
 
 rbenv rehash
 mv /cache /discourse/vendor/cache
-bundle install --without development test -j4 --no-cache --no-prune --path vendor/cache
+bundle config set no-cache 'true'
+bundle config set no-prune 'true'
+bundle config set without 'development test'
+bundle install -j4
 ruby script/bench.rb -n -b 2 -c 3
