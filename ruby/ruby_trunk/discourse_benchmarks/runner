@@ -38,6 +38,7 @@ if [[ ! $(psql -h postgres -U postgres -tc \
   createdb -T template0 -h postgres -U postgres discourse_profile
   pg_restore --no-owner -h postgres -U postgres -d discourse_profile discourse_profile.dump
 fi
+psql -h postgres -U postgres discourse_profile -c "UPDATE users SET active=true;"
 
 cd /discourse
 git reset --hard $DISCOURSE_COMMIT_HASH
