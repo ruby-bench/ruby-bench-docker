@@ -29,7 +29,7 @@ rbenv global master
 # For faster Bundle install
 echo "gem: --no-document" > ~/.gemrc
 gem install bundler -v 2.1.1
-gem install facter
+gem install facter -v 4.0.17
 gem install CFPropertyList
 
 if [[ ! $(psql -h postgres -U postgres -tc \

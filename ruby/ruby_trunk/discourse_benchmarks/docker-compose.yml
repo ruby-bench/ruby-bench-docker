@@ -12,6 +12,7 @@ services:
     networks:
       - redis-net
   discourse_ruby_trunk:
+    privileged: true
     build: .
     networks:
       - redis-net
