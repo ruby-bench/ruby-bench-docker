@@ -12,6 +12,7 @@ services:
     networks:
       - redis-net
   discourse_ruby_releases:
+    privileged: true
     build: .
     networks:
       - redis-net
